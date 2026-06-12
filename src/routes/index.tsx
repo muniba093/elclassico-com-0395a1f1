@@ -9,7 +9,7 @@ import sandwich from "@/assets/wa-1781244115847.jpeg.asset.json";
 import burger from "@/assets/double-classic-burger.jpg.asset.json";
 import wrap from "@/assets/a2bd3bbd-dc18-4eef-a6d7-e990c9afdbca.jpeg.asset.json";
 import cake from "@/assets/1652974718-cxvjhw.webp.asset.json";
-import pizza from "@/assets/img-20260612-wa0000.jpg.asset.json";
+import pizzaAsset from "@/assets/img-20260612-wa0000.jpg.asset.json";
 import storefront from "@/assets/fb-img-1781243476949.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
@@ -198,7 +198,7 @@ function HomePage() {
         <div className="mx-auto max-w-7xl px-6 grid lg:grid-cols-2 gap-16 items-center">
           <div className="relative">
             <img
-              src={pizza}
+              src={pizzaAsset.url}
               alt="Wood-fired pizza"
               loading="lazy"
               className="rounded-3xl object-cover w-full aspect-[4/5] shadow-lift"
