@@ -77,14 +77,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Elclassico — Where Great Food Meets Great Moments" },
+      { name: "description", content: "Premium cafe experience by Elclassico. Handcrafted beverages, fresh food, and a welcoming atmosphere designed for memorable moments." },
+      { name: "author", content: "Elclassico" },
+      { property: "og:title", content: "Elclassico — Premium Cafe" },
+      { property: "og:description", content: "Handcrafted beverages, fresh food, cozy ambience." },
+      { property: "og:site_name", content: "Elclassico" },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       {
