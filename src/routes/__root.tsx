@@ -80,11 +80,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Elclassico — Where Great Food Meets Great Moments" },
       { name: "description", content: "Premium cafe experience by Elclassico. Handcrafted beverages, fresh food, and a welcoming atmosphere designed for memorable moments." },
       { name: "author", content: "Elclassico" },
-      { property: "og:title", content: "Elclassico — Premium Cafe" },
-      { property: "og:description", content: "Handcrafted beverages, fresh food, cozy ambience." },
+      { property: "og:title", content: "Elclassico — Where Great Food Meets Great Moments" },
+      { property: "og:description", content: "Premium cafe experience by Elclassico. Handcrafted beverages, fresh food, and a welcoming atmosphere designed for memorable moments." },
       { property: "og:site_name", content: "Elclassico" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Elclassico — Where Great Food Meets Great Moments" },
+      { name: "twitter:description", content: "Premium cafe experience by Elclassico. Handcrafted beverages, fresh food, and a welcoming atmosphere designed for memorable moments." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/8d7dd5c2-3b8f-414f-96d8-bb4fd2ec1221/id-preview-ffe93d5b--8ce939aa-6bc0-499f-a0fb-df8caa3a4350.lovable.app-1781245158930.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/8d7dd5c2-3b8f-414f-96d8-bb4fd2ec1221/id-preview-ffe93d5b--8ce939aa-6bc0-499f-a0fb-df8caa3a4350.lovable.app-1781245158930.png" },
     ],
     links: [
       {
