@@ -185,7 +185,16 @@ function ItemModal({
   );
 }
 
-function Field({ label, value, onChange, type = "text", placeholder, textarea }: any) {
+function Field({
+  label, value, onChange, type = "text", placeholder, textarea,
+}: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  type?: string;
+  placeholder?: string;
+  textarea?: boolean;
+}) {
   return (
     <div>
       <label className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{label}</label>
