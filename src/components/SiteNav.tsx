@@ -1,7 +1,9 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ShoppingBag, User } from "lucide-react";
 import logo from "@/assets/fb-img-1781243515658.jpg.asset.json";
+import { useCart } from "@/lib/cart";
+import { useAuth } from "@/lib/auth";
 
 const links = [
   { to: "/", label: "Home" },
@@ -13,6 +15,8 @@ const links = [
 export function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { count } = useCart();
+  const { user, isAdmin } = useAuth();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -66,21 +70,51 @@ export function SiteNav() {
           </ul>
 
           <div className="hidden md:block">
-            <Link
-              to="/menu"
-              className="inline-flex items-center rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background shadow-soft transition-all hover:bg-foreground/90 hover:shadow-gold hover:-translate-y-0.5"
-            >
-              Order Now
-            </Link>
+            <div className="flex items-center gap-3">
+              {isAdmin && (
+                <Link to="/admin" className="text-sm font-medium text-foreground/80 hover:text-foreground">
+                  Admin
+                </Link>
+              )}
+              <Link
+                to={user ? "/my-orders" : "/auth"}
+                className="p-2 text-foreground/80 hover:text-foreground"
+                aria-label={user ? "My orders" : "Sign in"}
+              >
+                <User size={20} />
+              </Link>
+              <Link
+                to="/cart"
+                className="relative inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background shadow-soft transition-all hover:bg-foreground/90 hover:-translate-y-0.5"
+              >
+                <ShoppingBag size={16} />
+                Cart
+                {count > 0 && (
+                  <span className="ml-1 inline-flex items-center justify-center rounded-full bg-gold text-charcoal-deep text-[11px] font-semibold min-w-[20px] h-5 px-1.5">
+                    {count}
+                  </span>
+                )}
+              </Link>
+            </div>
           </div>
 
-          <button
-            className="md:hidden p-2 -mr-2 text-foreground"
-            aria-label="Menu"
-            onClick={() => setOpen((o) => !o)}
-          >
-            {open ? <X size={22} /> : <Menu size={22} />}
-          </button>
+          <div className="md:hidden flex items-center gap-1">
+            <Link to="/cart" className="relative p-2 text-foreground" aria-label="Cart">
+              <ShoppingBag size={20} />
+              {count > 0 && (
+                <span className="absolute -top-0.5 -right-0.5 inline-flex items-center justify-center rounded-full bg-gold text-charcoal-deep text-[10px] font-semibold min-w-[18px] h-[18px] px-1">
+                  {count}
+                </span>
+              )}
+            </Link>
+            <button
+              className="p-2 -mr-2 text-foreground"
+              aria-label="Menu"
+              onClick={() => setOpen((o) => !o)}
+            >
+              {open ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
         </nav>
 
         {open && (
@@ -97,6 +131,22 @@ export function SiteNav() {
                   </Link>
                 </li>
               ))}
+              {isAdmin && (
+                <li>
+                  <Link to="/admin" onClick={() => setOpen(false)} className="block text-lg font-display text-foreground">
+                    Admin Dashboard
+                  </Link>
+                </li>
+              )}
+              <li>
+                <Link
+                  to={user ? "/my-orders" : "/auth"}
+                  onClick={() => setOpen(false)}
+                  className="block text-lg font-display text-foreground"
+                >
+                  {user ? "My Orders" : "Sign In"}
+                </Link>
+              </li>
               <li>
                 <Link
                   to="/menu"
