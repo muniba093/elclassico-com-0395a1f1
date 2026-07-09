@@ -34,12 +34,12 @@ type MenuItem = {
   available: boolean;
 };
 
-type Sort = "popular" | "price-asc" | "price-desc" | "name";
+type Sort = "price-asc" | "price-desc" | "name";
 
 function MenuPage() {
   const [search, setSearch] = useState("");
   const [activeCat, setActiveCat] = useState<string>("all");
-  const [sort, setSort] = useState<Sort>("popular");
+  const [sort, setSort] = useState<Sort>("name");
   const { add } = useCart();
 
   const catsQ = useQuery({
@@ -70,8 +70,7 @@ function MenuPage() {
     const sorted = [...list];
     if (sort === "price-asc") sorted.sort((a, b) => Number(a.price) - Number(b.price));
     else if (sort === "price-desc") sorted.sort((a, b) => Number(b.price) - Number(a.price));
-    else if (sort === "name") sorted.sort((a, b) => a.name.localeCompare(b.name));
-    else sorted.sort((a, b) => Number(b.popular) - Number(a.popular));
+    else sorted.sort((a, b) => a.name.localeCompare(b.name));
     return sorted;
   }, [itemsQ.data, activeCat, search, sort]);
 
@@ -109,10 +108,9 @@ function MenuPage() {
               onChange={(e) => setSort(e.target.value as Sort)}
               className="rounded-full border border-border bg-card px-4 py-3 text-sm outline-none"
             >
-              <option value="popular">Sort: Popular</option>
+              <option value="name">Sort: Name A–Z</option>
               <option value="price-asc">Price: Low to High</option>
               <option value="price-desc">Price: High to Low</option>
-              <option value="name">Name: A–Z</option>
             </select>
           </div>
           <div className="flex gap-2 overflow-x-auto pb-1 -mx-1 px-1">
