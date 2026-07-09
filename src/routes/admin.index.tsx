@@ -63,8 +63,12 @@ function AdminOrders() {
 
   return (
     <div className="space-y-6">
-      <audio ref={audioRef} src="https://cdn.jsdelivr.net/gh/naptha/tesseract.js@master/tests/assets/sample.wav" preload="auto" />
-      <audio ref={audioRef as any} src="data:audio/wav;base64,UklGRlIAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YS4AAAB/f39/f4CAgIB/f39/f4CAgIB/f39/f4CAgIB/f39/f4CAgIB/f39/f4CAgIB/f39/f4A=" preload="auto" style={{ display: "none" }} />
+      <audio
+        ref={audioRef}
+        preload="auto"
+        style={{ display: "none" }}
+        src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_1a05131c14.mp3?filename=notification-sound-7062.mp3"
+      />
       <div className="grid gap-4 sm:grid-cols-3">
         <Stat label="Total Orders" value={String(stats.total)} />
         <Stat label="Pending" value={String(stats.pending)} />
