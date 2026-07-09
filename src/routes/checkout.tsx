@@ -173,7 +173,7 @@ function CheckoutPage() {
                 </div>
               </div>
               <button
-                disabled={submitting}
+                disabled={submitting || !isOpen || subtotal < minOrder}
                 className="w-full rounded-full bg-foreground text-background py-3 text-sm font-medium disabled:opacity-60"
               >
                 {submitting ? "Placing order…" : `Place Order · ${formatPKR(total)}`}
