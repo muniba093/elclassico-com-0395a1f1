@@ -137,9 +137,11 @@ export type Database = {
           customer_name: string
           customer_phone: string
           delivery_fee: number
+          discount: number
           id: string
           notes: string | null
           payment_method: string
+          promo_code: string | null
           status: Database["public"]["Enums"]["order_status"]
           subtotal: number
           total: number
@@ -152,9 +154,11 @@ export type Database = {
           customer_name: string
           customer_phone: string
           delivery_fee?: number
+          discount?: number
           id?: string
           notes?: string | null
           payment_method?: string
+          promo_code?: string | null
           status?: Database["public"]["Enums"]["order_status"]
           subtotal: number
           total: number
@@ -167,14 +171,106 @@ export type Database = {
           customer_name?: string
           customer_phone?: string
           delivery_fee?: number
+          discount?: number
           id?: string
           notes?: string | null
           payment_method?: string
+          promo_code?: string | null
           status?: Database["public"]["Enums"]["order_status"]
           subtotal?: number
           total?: number
           updated_at?: string
           user_id?: string | null
+        }
+        Relationships: []
+      }
+      promo_codes: {
+        Row: {
+          active: boolean
+          code: string
+          created_at: string
+          id: string
+          min_order_amount: number
+          type: Database["public"]["Enums"]["promo_type"]
+          updated_at: string
+          usage_limit: number | null
+          used_count: number
+          value: number
+        }
+        Insert: {
+          active?: boolean
+          code: string
+          created_at?: string
+          id?: string
+          min_order_amount?: number
+          type: Database["public"]["Enums"]["promo_type"]
+          updated_at?: string
+          usage_limit?: number | null
+          used_count?: number
+          value?: number
+        }
+        Update: {
+          active?: boolean
+          code?: string
+          created_at?: string
+          id?: string
+          min_order_amount?: number
+          type?: Database["public"]["Enums"]["promo_type"]
+          updated_at?: string
+          usage_limit?: number | null
+          used_count?: number
+          value?: number
+        }
+        Relationships: []
+      }
+      site_settings: {
+        Row: {
+          about_text: string
+          address: string
+          contact_email: string
+          delivery_fee: number
+          hero_subtitle: string
+          hero_title: string
+          id: string
+          is_open: boolean
+          min_order_amount: number
+          notification_email: string
+          opening_hours: Json
+          phone: string
+          restaurant_name: string
+          updated_at: string
+        }
+        Insert: {
+          about_text?: string
+          address?: string
+          contact_email?: string
+          delivery_fee?: number
+          hero_subtitle?: string
+          hero_title?: string
+          id?: string
+          is_open?: boolean
+          min_order_amount?: number
+          notification_email?: string
+          opening_hours?: Json
+          phone?: string
+          restaurant_name?: string
+          updated_at?: string
+        }
+        Update: {
+          about_text?: string
+          address?: string
+          contact_email?: string
+          delivery_fee?: number
+          hero_subtitle?: string
+          hero_title?: string
+          id?: string
+          is_open?: boolean
+          min_order_amount?: number
+          notification_email?: string
+          opening_hours?: Json
+          phone?: string
+          restaurant_name?: string
+          updated_at?: string
         }
         Relationships: []
       }
@@ -221,6 +317,7 @@ export type Database = {
         | "out_for_delivery"
         | "delivered"
         | "cancelled"
+      promo_type: "flat" | "percent" | "free_delivery"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -357,6 +454,7 @@ export const Constants = {
         "delivered",
         "cancelled",
       ],
+      promo_type: ["flat", "percent", "free_delivery"],
     },
   },
 } as const

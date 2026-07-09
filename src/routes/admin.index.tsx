@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { formatPKR } from "@/lib/cart";
@@ -12,6 +12,7 @@ export const Route = createFileRoute("/admin/")({
 
 function AdminOrders() {
   const qc = useQueryClient();
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const q = useQuery({
     queryKey: ["admin-orders"],
     queryFn: async () => {
@@ -27,7 +28,17 @@ function AdminOrders() {
   useEffect(() => {
     const ch = supabase
       .channel("admin-orders-rt")
-      .on("postgres_changes", { event: "*", schema: "public", table: "orders" }, () => {
+      .on("postgres_changes", { event: "INSERT", schema: "public", table: "orders" }, (payload: any) => {
+        qc.invalidateQueries({ queryKey: ["admin-orders"] });
+        toast.success(`New order from ${payload?.new?.customer_name ?? "customer"}!`);
+        try {
+          if (audioRef.current) {
+            audioRef.current.currentTime = 0;
+            audioRef.current.play().catch(() => {});
+          }
+        } catch {}
+      })
+      .on("postgres_changes", { event: "UPDATE", schema: "public", table: "orders" }, () => {
         qc.invalidateQueries({ queryKey: ["admin-orders"] });
       })
       .subscribe();
@@ -52,6 +63,12 @@ function AdminOrders() {
 
   return (
     <div className="space-y-6">
+      <audio
+        ref={audioRef}
+        preload="auto"
+        style={{ display: "none" }}
+        src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_1a05131c14.mp3?filename=notification-sound-7062.mp3"
+      />
       <div className="grid gap-4 sm:grid-cols-3">
         <Stat label="Total Orders" value={String(stats.total)} />
         <Stat label="Pending" value={String(stats.pending)} />

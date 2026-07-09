@@ -20,6 +20,9 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminUsersRouteImport } from './routes/admin.users'
+import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
+import { Route as AdminPromosRouteImport } from './routes/admin.promos'
 import { Route as AdminMenuRouteImport } from './routes/admin.menu'
 import { Route as AdminCategoriesRouteImport } from './routes/admin.categories'
 
@@ -78,6 +81,21 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPromosRoute = AdminPromosRouteImport.update({
+  id: '/promos',
+  path: '/promos',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminMenuRoute = AdminMenuRouteImport.update({
   id: '/menu',
   path: '/menu',
@@ -102,6 +120,9 @@ export interface FileRoutesByFullPath {
   '/visit': typeof VisitRoute
   '/admin/categories': typeof AdminCategoriesRoute
   '/admin/menu': typeof AdminMenuRoute
+  '/admin/promos': typeof AdminPromosRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/users': typeof AdminUsersRoute
   '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
@@ -116,6 +137,9 @@ export interface FileRoutesByTo {
   '/visit': typeof VisitRoute
   '/admin/categories': typeof AdminCategoriesRoute
   '/admin/menu': typeof AdminMenuRoute
+  '/admin/promos': typeof AdminPromosRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/users': typeof AdminUsersRoute
   '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
@@ -132,6 +156,9 @@ export interface FileRoutesById {
   '/visit': typeof VisitRoute
   '/admin/categories': typeof AdminCategoriesRoute
   '/admin/menu': typeof AdminMenuRoute
+  '/admin/promos': typeof AdminPromosRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/users': typeof AdminUsersRoute
   '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
@@ -149,6 +176,9 @@ export interface FileRouteTypes {
     | '/visit'
     | '/admin/categories'
     | '/admin/menu'
+    | '/admin/promos'
+    | '/admin/settings'
+    | '/admin/users'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -163,6 +193,9 @@ export interface FileRouteTypes {
     | '/visit'
     | '/admin/categories'
     | '/admin/menu'
+    | '/admin/promos'
+    | '/admin/settings'
+    | '/admin/users'
     | '/admin'
   id:
     | '__root__'
@@ -178,6 +211,9 @@ export interface FileRouteTypes {
     | '/visit'
     | '/admin/categories'
     | '/admin/menu'
+    | '/admin/promos'
+    | '/admin/settings'
+    | '/admin/users'
     | '/admin/'
   fileRoutesById: FileRoutesById
 }
@@ -273,6 +309,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/promos': {
+      id: '/admin/promos'
+      path: '/promos'
+      fullPath: '/admin/promos'
+      preLoaderRoute: typeof AdminPromosRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/menu': {
       id: '/admin/menu'
       path: '/menu'
@@ -293,12 +350,18 @@ declare module '@tanstack/react-router' {
 interface AdminRouteChildren {
   AdminCategoriesRoute: typeof AdminCategoriesRoute
   AdminMenuRoute: typeof AdminMenuRoute
+  AdminPromosRoute: typeof AdminPromosRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminUsersRoute: typeof AdminUsersRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminCategoriesRoute: AdminCategoriesRoute,
   AdminMenuRoute: AdminMenuRoute,
+  AdminPromosRoute: AdminPromosRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
+  AdminUsersRoute: AdminUsersRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 

@@ -4,6 +4,7 @@ import { Menu, X, ShoppingBag, User } from "lucide-react";
 import logo from "@/assets/fb-img-1781243515658.jpg.asset.json";
 import { useCart } from "@/lib/cart";
 import { useAuth } from "@/lib/auth";
+import { useSiteSettings } from "@/lib/site-settings";
 
 const links = [
   { to: "/", label: "Home" },
@@ -17,6 +18,8 @@ export function SiteNav() {
   const [open, setOpen] = useState(false);
   const { count } = useCart();
   const { user, isAdmin } = useAuth();
+  const { data: settings } = useSiteSettings();
+  const closed = settings?.is_open === false;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -26,9 +29,16 @@ export function SiteNav() {
   }, []);
 
   return (
+    <>
+    {closed && (
+      <div className="fixed inset-x-0 top-0 z-[60] bg-destructive text-destructive-foreground text-center text-xs sm:text-sm py-2 px-4">
+        We're currently closed — online orders are paused. Please check back soon.
+      </div>
+    )}
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
         scrolled ? "py-2" : "py-4"
+      } ${closed ? "mt-8" : ""
       }`}
     >
       <div
@@ -161,5 +171,6 @@ export function SiteNav() {
         )}
       </div>
     </header>
+    </>
   );
 }
