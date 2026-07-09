@@ -6,6 +6,7 @@ import { useCart, formatPKR } from "@/lib/cart";
 import { useAuth } from "@/lib/auth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { useSiteSettings } from "@/lib/site-settings";
 
 export const Route = createFileRoute("/checkout")({
   head: () => ({
@@ -25,10 +26,24 @@ function CheckoutPage() {
   const { items, subtotal, clear } = useCart();
   const { user, loading: authLoading } = useAuth();
   const navigate = useNavigate();
+  const settingsQ = useSiteSettings();
+  const settings = settingsQ.data;
   const [form, setForm] = useState({ name: "", phone: "", address: "", notes: "" });
   const [submitting, setSubmitting] = useState(false);
-  const deliveryFee = 150;
-  const total = subtotal + deliveryFee;
+  const [promoInput, setPromoInput] = useState("");
+  const [promo, setPromo] = useState<null | { id: string; code: string; type: "flat" | "percent" | "free_delivery"; value: number; min_order_amount: number; usage_limit: number | null; used_count: number }>(null);
+  const [promoErr, setPromoErr] = useState("");
+
+  const baseDelivery = Number(settings?.delivery_fee ?? 150);
+  const freeDelivery = promo?.type === "free_delivery";
+  const deliveryFee = freeDelivery ? 0 : baseDelivery;
+  const discount = !promo ? 0
+    : promo.type === "flat" ? Math.min(promo.value, subtotal)
+    : promo.type === "percent" ? Math.round((subtotal * promo.value) / 100)
+    : 0;
+  const total = Math.max(0, subtotal - discount + deliveryFee);
+  const minOrder = Number(settings?.min_order_amount ?? 0);
+  const isOpen = settings?.is_open !== false;
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -55,6 +70,22 @@ function CheckoutPage() {
     );
   }
 
+  async function applyPromo() {
+    setPromoErr("");
+    const code = promoInput.trim().toUpperCase();
+    if (!code) return;
+    const { data, error } = await supabase.from("promo_codes").select("*").eq("code", code).eq("active", true).maybeSingle();
+    if (error || !data) { setPromoErr("Invalid or expired code"); setPromo(null); return; }
+    if (subtotal < Number(data.min_order_amount)) {
+      setPromoErr(`Requires min. order of Rs. ${data.min_order_amount}`); setPromo(null); return;
+    }
+    if (data.usage_limit != null && data.used_count >= data.usage_limit) {
+      setPromoErr("This code has reached its usage limit"); setPromo(null); return;
+    }
+    setPromo(data as any);
+    toast.success(`Promo "${data.code}" applied`);
+  }
+
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     const parsed = schema.safeParse(form);
@@ -62,6 +93,8 @@ function CheckoutPage() {
       toast.error(parsed.error.issues[0].message);
       return;
     }
+    if (!isOpen) { toast.error("Restaurant is currently closed."); return; }
+    if (subtotal < minOrder) { toast.error(`Minimum order is Rs. ${minOrder}`); return; }
     if (!user) return;
     setSubmitting(true);
     try {
@@ -76,6 +109,8 @@ function CheckoutPage() {
           payment_method: "cod",
           subtotal,
           delivery_fee: deliveryFee,
+          discount,
+          promo_code: promo?.code ?? null,
           total,
           status: "pending",
         })
@@ -94,6 +129,10 @@ function CheckoutPage() {
       );
       if (itemsErr) throw itemsErr;
 
+      if (promo) {
+        await supabase.from("promo_codes").update({ used_count: promo.used_count + 1 }).eq("id", promo.id);
+      }
+
       clear();
       toast.success("Order placed! We're preparing it now.");
       navigate({ to: "/my-orders" });
@@ -110,6 +149,16 @@ function CheckoutPage() {
       <section className="pt-32 pb-20">
         <div className="mx-auto max-w-5xl px-6">
           <h1 className="font-display text-4xl sm:text-5xl">Checkout</h1>
+          {!isOpen && (
+            <div className="mt-6 rounded-2xl border border-destructive/40 bg-destructive/10 px-5 py-4 text-sm text-destructive">
+              The restaurant is currently closed. You cannot place an order right now.
+            </div>
+          )}
+          {isOpen && subtotal < minOrder && (
+            <div className="mt-6 rounded-2xl border border-border bg-muted/30 px-5 py-4 text-sm">
+              Minimum order is Rs. {minOrder}. Add Rs. {minOrder - subtotal} more to checkout.
+            </div>
+          )}
           <div className="mt-10 grid lg:grid-cols-[1fr_360px] gap-8">
             <form onSubmit={submit} className="space-y-4 rounded-2xl border border-border bg-card p-6">
               <h2 className="font-display text-2xl">Delivery Details</h2>
@@ -140,8 +189,27 @@ function CheckoutPage() {
                   </li>
                 ))}
               </ul>
+              <div className="mt-5 border-t border-border pt-4">
+                <label className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Promo code</label>
+                <div className="mt-2 flex gap-2">
+                  <input
+                    value={promoInput}
+                    onChange={(e) => setPromoInput(e.target.value)}
+                    placeholder="Enter code"
+                    className="flex-1 rounded-xl border border-border bg-background px-3 py-2 text-sm uppercase"
+                  />
+                  <button type="button" onClick={applyPromo} className="rounded-full bg-foreground text-background px-4 py-2 text-sm">
+                    Apply
+                  </button>
+                </div>
+                {promoErr && <p className="mt-2 text-xs text-destructive">{promoErr}</p>}
+                {promo && <p className="mt-2 text-xs text-emerald-600">Applied: {promo.code}</p>}
+              </div>
               <dl className="mt-5 space-y-2 text-sm border-t border-border pt-4">
                 <div className="flex justify-between"><dt className="text-muted-foreground">Subtotal</dt><dd>{formatPKR(subtotal)}</dd></div>
+                {discount > 0 && (
+                  <div className="flex justify-between text-emerald-600"><dt>Discount</dt><dd>−{formatPKR(discount)}</dd></div>
+                )}
                 <div className="flex justify-between"><dt className="text-muted-foreground">Delivery</dt><dd>{formatPKR(deliveryFee)}</dd></div>
                 <div className="border-t border-border pt-3 flex justify-between font-display text-xl"><dt>Total</dt><dd>{formatPKR(total)}</dd></div>
               </dl>
