@@ -7,6 +7,11 @@ import { useAuth } from "@/lib/auth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useSiteSettings } from "@/lib/site-settings";
+import emailjs from "@emailjs/browser";
+
+const EMAILJS_SERVICE_ID = "service_i7n84gh";
+const EMAILJS_TEMPLATE_ID = "template_5259pag";
+const EMAILJS_PUBLIC_KEY = "nvu_-r-AfKOOXC-xQ";
 
 export const Route = createFileRoute("/checkout")({
   head: () => ({
@@ -131,6 +136,33 @@ function CheckoutPage() {
 
       if (promo) {
         await supabase.from("promo_codes").update({ used_count: promo.used_count + 1 }).eq("id", promo.id);
+      }
+
+      // Fire-and-forget email notification to restaurant owner
+      try {
+        const itemsList = items.map((i) => `${i.name} × ${i.quantity} — ${formatPKR(i.price * i.quantity)}`).join("\n");
+        await emailjs.send(
+          EMAILJS_SERVICE_ID,
+          EMAILJS_TEMPLATE_ID,
+          {
+            to_email: settings?.notification_email || "munibaakram112@gmail.com",
+            order_id: order.id.slice(0, 8).toUpperCase(),
+            customer_name: form.name.trim(),
+            customer_phone: form.phone.trim(),
+            customer_address: form.address.trim(),
+            notes: form.notes?.trim() || "-",
+            items: itemsList,
+            subtotal: formatPKR(subtotal),
+            discount: discount > 0 ? `-${formatPKR(discount)}` : "-",
+            delivery_fee: formatPKR(deliveryFee),
+            total: formatPKR(total),
+            promo_code: promo?.code ?? "-",
+            payment_method: "Cash on Delivery",
+          },
+          { publicKey: EMAILJS_PUBLIC_KEY },
+        );
+      } catch (mailErr) {
+        console.warn("Order email failed:", mailErr);
       }
 
       clear();
