@@ -229,6 +229,10 @@ export type Database = {
           address: string
           contact_email: string
           delivery_fee: number
+          emailjs_enabled: boolean | null
+          emailjs_public_key: string | null
+          emailjs_service_id: string | null
+          emailjs_template_id: string | null
           hero_subtitle: string
           hero_title: string
           id: string
@@ -247,6 +251,10 @@ export type Database = {
           address?: string
           contact_email?: string
           delivery_fee?: number
+          emailjs_enabled?: boolean | null
+          emailjs_public_key?: string | null
+          emailjs_service_id?: string | null
+          emailjs_template_id?: string | null
           hero_subtitle?: string
           hero_title?: string
           id?: string
@@ -265,6 +273,10 @@ export type Database = {
           address?: string
           contact_email?: string
           delivery_fee?: number
+          emailjs_enabled?: boolean | null
+          emailjs_public_key?: string | null
+          emailjs_service_id?: string | null
+          emailjs_template_id?: string | null
           hero_subtitle?: string
           hero_title?: string
           id?: string

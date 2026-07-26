@@ -9,10 +9,6 @@ import { toast } from "sonner";
 import { useSiteSettings } from "@/lib/site-settings";
 import emailjs from "@emailjs/browser";
 
-const EMAILJS_SERVICE_ID = "service_i7n84gh";
-const EMAILJS_TEMPLATE_ID = "template_5259pag";
-const EMAILJS_PUBLIC_KEY = "nvu_-r-AfKOOXC-xQ";
-
 export const Route = createFileRoute("/checkout")({
   head: () => ({
     meta: [{ title: "Checkout — Elclassico" }, { name: "description", content: "Complete your order." }],
@@ -149,10 +145,15 @@ function CheckoutPage() {
 
       // Fire-and-forget email notification to restaurant owner
       try {
+        const serviceId = settings?.emailjs_service_id;
+        const templateId = settings?.emailjs_template_id;
+        const publicKey = settings?.emailjs_public_key;
+        const emailEnabled = settings?.emailjs_enabled !== false;
+        if (emailEnabled && serviceId && templateId && publicKey) {
         const itemsList = items.map((i) => `${i.name} × ${i.quantity} — ${formatPKR(i.price * i.quantity)}`).join("\n");
         await emailjs.send(
-          EMAILJS_SERVICE_ID,
-          EMAILJS_TEMPLATE_ID,
+          serviceId,
+          templateId,
           {
             to_email: settings?.notification_email || "munibaakram112@gmail.com",
             order_id: order.id.slice(0, 8).toUpperCase(),
@@ -168,15 +169,16 @@ function CheckoutPage() {
             promo_code: promo?.code ?? "-",
             payment_method: paymentMethod === "online" ? "Online Payment" : "Cash on Delivery",
           },
-          { publicKey: EMAILJS_PUBLIC_KEY },
+          { publicKey },
         );
+        }
       } catch (mailErr) {
         console.warn("Order email failed:", mailErr);
       }
 
       clear();
       toast.success("Order placed! We're preparing it now.");
-      navigate({ to: "/my-orders" });
+      navigate({ to: "/order/$id", params: { id: order.id } });
     } catch (err: any) {
       toast.error(err?.message ?? "Failed to place order");
     } finally {

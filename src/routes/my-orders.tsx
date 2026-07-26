@@ -78,6 +78,11 @@ function MyOrders() {
                     <span className="text-muted-foreground">Total (incl. delivery)</span>
                     <span className="font-display text-lg">{formatPKR(Number(o.total))}</span>
                   </div>
+                  <div className="mt-4 flex justify-end">
+                    <Link to="/order/$id" params={{ id: o.id }} className="text-sm underline text-muted-foreground hover:text-foreground">
+                      Track order →
+                    </Link>
+                  </div>
                 </article>
               ))}
             </div>

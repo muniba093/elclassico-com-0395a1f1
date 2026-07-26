@@ -41,6 +41,10 @@ function AdminSettings() {
       opening_hours: form.opening_hours,
       online_payment_enabled: form.online_payment_enabled,
       payment_instructions: form.payment_instructions,
+      emailjs_service_id: form.emailjs_service_id,
+      emailjs_template_id: form.emailjs_template_id,
+      emailjs_public_key: form.emailjs_public_key,
+      emailjs_enabled: form.emailjs_enabled,
     }).eq("id", form.id);
     setSaving(false);
     if (error) toast.error(error.message);
@@ -93,6 +97,19 @@ function AdminSettings() {
       <Section title="Notifications">
         <Input label="New-order notification email" value={form.notification_email} onChange={(v) => update({ notification_email: v })} />
         <p className="text-xs text-muted-foreground">You'll receive a copy of every new order at this address.</p>
+      </Section>
+
+      <Section title="EmailJS configuration">
+        <label className="flex items-center gap-3">
+          <input type="checkbox" checked={!!form.emailjs_enabled} onChange={(e) => update({ emailjs_enabled: e.target.checked })} className="h-5 w-5" />
+          <span className="text-sm">Send order emails via EmailJS</span>
+        </label>
+        <Input label="Service ID" value={form.emailjs_service_id ?? ""} onChange={(v) => update({ emailjs_service_id: v })} />
+        <Input label="Template ID" value={form.emailjs_template_id ?? ""} onChange={(v) => update({ emailjs_template_id: v })} />
+        <Input label="Public Key" value={form.emailjs_public_key ?? ""} onChange={(v) => update({ emailjs_public_key: v })} />
+        <p className="text-xs text-muted-foreground">
+          Template variables sent on each new order: <code className="text-[10px]">to_email, order_id, customer_name, customer_phone, customer_address, notes, items, subtotal, discount, delivery_fee, total, promo_code, payment_method</code>
+        </p>
       </Section>
 
       <Section title="Opening hours">
