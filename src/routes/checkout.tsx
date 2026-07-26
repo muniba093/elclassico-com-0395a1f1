@@ -9,10 +9,6 @@ import { toast } from "sonner";
 import { useSiteSettings } from "@/lib/site-settings";
 import emailjs from "@emailjs/browser";
 
-const EMAILJS_SERVICE_ID = "service_i7n84gh";
-const EMAILJS_TEMPLATE_ID = "template_5259pag";
-const EMAILJS_PUBLIC_KEY = "nvu_-r-AfKOOXC-xQ";
-
 export const Route = createFileRoute("/checkout")({
   head: () => ({
     meta: [{ title: "Checkout — Elclassico" }, { name: "description", content: "Complete your order." }],
