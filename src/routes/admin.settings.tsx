@@ -41,6 +41,10 @@ function AdminSettings() {
       opening_hours: form.opening_hours,
       online_payment_enabled: form.online_payment_enabled,
       payment_instructions: form.payment_instructions,
+      emailjs_service_id: form.emailjs_service_id,
+      emailjs_template_id: form.emailjs_template_id,
+      emailjs_public_key: form.emailjs_public_key,
+      emailjs_enabled: form.emailjs_enabled,
     }).eq("id", form.id);
     setSaving(false);
     if (error) toast.error(error.message);
