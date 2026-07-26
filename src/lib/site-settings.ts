@@ -19,6 +19,10 @@ export type SiteSettings = {
   opening_hours: OpeningHours;
   online_payment_enabled: boolean;
   payment_instructions: string;
+  emailjs_service_id: string;
+  emailjs_template_id: string;
+  emailjs_public_key: string;
+  emailjs_enabled: boolean;
 };
 
 export function useSiteSettings() {
