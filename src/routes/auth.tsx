@@ -4,6 +4,7 @@ import { z } from "zod";
 import { Eye, EyeOff } from "lucide-react";
 import { SiteNav } from "@/components/SiteNav";
 import { supabase } from "@/integrations/supabase/client";
+import { lovable } from "@/integrations/lovable";
 import { useAuth } from "@/lib/auth";
 import { toast } from "sonner";
 
@@ -27,6 +28,7 @@ function AuthPage() {
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -64,6 +66,21 @@ function AuthPage() {
       toast.error(err?.message ?? "Authentication failed");
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function googleSignIn() {
+    setGoogleLoading(true);
+    try {
+      const result = await lovable.auth.signInWithOAuth("google", {
+        redirect_uri: window.location.origin,
+      });
+      if (result.error) throw result.error;
+      if (result.redirected) return;
+    } catch (err: any) {
+      toast.error(err?.message ?? "Google sign-in failed");
+    } finally {
+      setGoogleLoading(false);
     }
   }
 
