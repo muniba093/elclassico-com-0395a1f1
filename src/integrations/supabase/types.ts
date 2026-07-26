@@ -235,7 +235,9 @@ export type Database = {
           is_open: boolean
           min_order_amount: number
           notification_email: string
+          online_payment_enabled: boolean
           opening_hours: Json
+          payment_instructions: string
           phone: string
           restaurant_name: string
           updated_at: string
@@ -251,7 +253,9 @@ export type Database = {
           is_open?: boolean
           min_order_amount?: number
           notification_email?: string
+          online_payment_enabled?: boolean
           opening_hours?: Json
+          payment_instructions?: string
           phone?: string
           restaurant_name?: string
           updated_at?: string
@@ -267,7 +271,9 @@ export type Database = {
           is_open?: boolean
           min_order_amount?: number
           notification_email?: string
+          online_payment_enabled?: boolean
           opening_hours?: Json
+          payment_instructions?: string
           phone?: string
           restaurant_name?: string
           updated_at?: string

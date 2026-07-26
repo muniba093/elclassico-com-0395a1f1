@@ -39,6 +39,8 @@ function AdminSettings() {
       delivery_fee: Number(form.delivery_fee) || 0,
       min_order_amount: Number(form.min_order_amount) || 0,
       opening_hours: form.opening_hours,
+      online_payment_enabled: form.online_payment_enabled,
+      payment_instructions: form.payment_instructions,
     }).eq("id", form.id);
     setSaving(false);
     if (error) toast.error(error.message);
@@ -74,6 +76,18 @@ function AdminSettings() {
       <Section title="Delivery">
         <Input type="number" label="Delivery fee (Rs.)" value={String(form.delivery_fee)} onChange={(v) => update({ delivery_fee: Number(v) })} />
         <Input type="number" label="Minimum order amount (Rs.)" value={String(form.min_order_amount)} onChange={(v) => update({ min_order_amount: Number(v) })} />
+      </Section>
+
+      <Section title="Online payment">
+        <label className="flex items-center gap-3">
+          <input type="checkbox" checked={!!form.online_payment_enabled} onChange={(e) => update({ online_payment_enabled: e.target.checked })} className="h-5 w-5" />
+          <span className="text-sm">Enable online payment option at checkout</span>
+        </label>
+        <Textarea
+          label="Payment instructions (bank / JazzCash / EasyPaisa details shown to customer)"
+          value={form.payment_instructions ?? ""}
+          onChange={(v) => update({ payment_instructions: v })}
+        />
       </Section>
 
       <Section title="Notifications">

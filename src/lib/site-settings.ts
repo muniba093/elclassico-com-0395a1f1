@@ -17,6 +17,8 @@ export type SiteSettings = {
   delivery_fee: number;
   min_order_amount: number;
   opening_hours: OpeningHours;
+  online_payment_enabled: boolean;
+  payment_instructions: string;
 };
 
 export function useSiteSettings() {

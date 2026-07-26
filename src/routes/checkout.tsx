@@ -38,6 +38,7 @@ function CheckoutPage() {
   const [promoInput, setPromoInput] = useState("");
   const [promo, setPromo] = useState<null | { id: string; code: string; type: "flat" | "percent" | "free_delivery"; value: number; min_order_amount: number; usage_limit: number | null; used_count: number }>(null);
   const [promoErr, setPromoErr] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState<"cod" | "online">("cod");
 
   const baseDelivery = Number(settings?.delivery_fee ?? 150);
   const freeDelivery = promo?.type === "free_delivery";
@@ -49,6 +50,8 @@ function CheckoutPage() {
   const total = Math.max(0, subtotal - discount + deliveryFee);
   const minOrder = Number(settings?.min_order_amount ?? 0);
   const isOpen = settings?.is_open !== false;
+  const onlineEnabled = !!settings?.online_payment_enabled;
+  useEffect(() => { if (!onlineEnabled && paymentMethod === "online") setPaymentMethod("cod"); }, [onlineEnabled, paymentMethod]);
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -91,6 +94,12 @@ function CheckoutPage() {
     toast.success(`Promo "${data.code}" applied`);
   }
 
+  function removePromo() {
+    setPromo(null);
+    setPromoInput("");
+    setPromoErr("");
+  }
+
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     const parsed = schema.safeParse(form);
@@ -111,7 +120,7 @@ function CheckoutPage() {
           customer_phone: form.phone.trim(),
           customer_address: form.address.trim(),
           notes: form.notes?.trim() || null,
-          payment_method: "cod",
+          payment_method: paymentMethod,
           subtotal,
           delivery_fee: deliveryFee,
           discount,
@@ -157,7 +166,7 @@ function CheckoutPage() {
             delivery_fee: formatPKR(deliveryFee),
             total: formatPKR(total),
             promo_code: promo?.code ?? "-",
-            payment_method: "Cash on Delivery",
+            payment_method: paymentMethod === "online" ? "Online Payment" : "Cash on Delivery",
           },
           { publicKey: EMAILJS_PUBLIC_KEY },
         );
@@ -200,8 +209,23 @@ function CheckoutPage() {
               <Field label="Notes (optional)" value={form.notes} onChange={(v) => setForm({ ...form, notes: v })} textarea />
               <div>
                 <label className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Payment</label>
-                <div className="mt-2 rounded-xl border border-border bg-background px-4 py-3 text-sm">
-                  Cash on Delivery
+                <div className="mt-2 grid gap-2">
+                  <label className={`flex items-start gap-3 rounded-xl border px-4 py-3 text-sm cursor-pointer ${paymentMethod === "cod" ? "border-foreground bg-muted/40" : "border-border bg-background"}`}>
+                    <input type="radio" name="pm" checked={paymentMethod === "cod"} onChange={() => setPaymentMethod("cod")} className="mt-1" />
+                    <span><span className="font-medium">Cash on Delivery</span><br/><span className="text-xs text-muted-foreground">Pay in cash when your order arrives.</span></span>
+                  </label>
+                  {onlineEnabled && (
+                    <label className={`flex items-start gap-3 rounded-xl border px-4 py-3 text-sm cursor-pointer ${paymentMethod === "online" ? "border-foreground bg-muted/40" : "border-border bg-background"}`}>
+                      <input type="radio" name="pm" checked={paymentMethod === "online"} onChange={() => setPaymentMethod("online")} className="mt-1" />
+                      <span className="flex-1">
+                        <span className="font-medium">Online Payment</span><br/>
+                        <span className="text-xs text-muted-foreground">Bank / JazzCash / EasyPaisa transfer.</span>
+                        {paymentMethod === "online" && settings?.payment_instructions && (
+                          <span className="mt-2 block whitespace-pre-wrap rounded-lg bg-background border border-border p-3 text-xs">{settings.payment_instructions}</span>
+                        )}
+                      </span>
+                    </label>
+                  )}
                 </div>
               </div>
               <button
@@ -235,7 +259,12 @@ function CheckoutPage() {
                   </button>
                 </div>
                 {promoErr && <p className="mt-2 text-xs text-destructive">{promoErr}</p>}
-                {promo && <p className="mt-2 text-xs text-emerald-600">Applied: {promo.code}</p>}
+                {promo && (
+                  <div className="mt-2 flex items-center justify-between rounded-lg bg-emerald-500/10 border border-emerald-500/30 px-3 py-2 text-xs">
+                    <span className="text-emerald-600">Applied: <strong>{promo.code}</strong></span>
+                    <button type="button" onClick={removePromo} className="text-muted-foreground hover:text-destructive underline">Remove</button>
+                  </div>
+                )}
               </div>
               <dl className="mt-5 space-y-2 text-sm border-t border-border pt-4">
                 <div className="flex justify-between"><dt className="text-muted-foreground">Subtotal</dt><dd>{formatPKR(subtotal)}</dd></div>
