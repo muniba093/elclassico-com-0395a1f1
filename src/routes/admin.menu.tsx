@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Plus, Pencil, Trash2, X } from "lucide-react";
+import { Plus, Pencil, Trash2, X, Upload, Image as ImageIcon } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { formatPKR } from "@/lib/cart";
 import { toast } from "sonner";
@@ -155,7 +155,7 @@ function ItemModal({
           <Field label="Name" value={form.name ?? ""} onChange={(v) => setForm({ ...form, name: v })} />
           <Field label="Description" value={form.description ?? ""} onChange={(v) => setForm({ ...form, description: v })} textarea />
           <Field label="Price (PKR)" value={String(form.price ?? "")} onChange={(v) => setForm({ ...form, price: Number(v) })} type="number" />
-          <Field label="Image URL" value={form.image_url ?? ""} onChange={(v) => setForm({ ...form, image_url: v })} placeholder="https://…" />
+          <ImagePicker value={form.image_url ?? ""} onChange={(v) => setForm({ ...form, image_url: v })} />
           <div>
             <label className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Category</label>
             <select
