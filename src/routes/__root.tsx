@@ -136,12 +136,14 @@ function RootComponent() {
       <AuthProvider>
         <CartProvider>
           <SidebarProvider defaultOpen={false}>
-            <AppSidebar />
-            <main className="flex-1">
-              {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-              <Outlet />
-            </main>
-            <Toaster richColors position="top-center" />
+            <div className="min-h-screen flex w-full">
+              <AppSidebar />
+              <div className="flex-1 flex flex-col">
+                {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+                <Outlet />
+                <Toaster richColors position="top-center" />
+              </div>
+            </div>
           </SidebarProvider>
         </CartProvider>
       </AuthProvider>
