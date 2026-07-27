@@ -166,6 +166,8 @@
     font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+     width: 100%;
+  overflow-x: hidden;
   }
 
   h1, h2, h3, h4, .font-display {
