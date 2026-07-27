@@ -5,6 +5,7 @@ import logo from "@/assets/fb-img-1781243515658.jpg.asset.json";
 import { useCart } from "@/lib/cart";
 import { useAuth } from "@/lib/auth";
 import { useSiteSettings } from "@/lib/site-settings";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 
 const links = [
   { to: "/", label: "Home" },
@@ -51,18 +52,21 @@ export function SiteNav() {
             scrolled ? "glass shadow-soft" : "bg-transparent"
           }`}
         >
-          <Link to="/" className="flex items-center gap-2 group">
-            <img
-              src={logo.url}
-              alt="Elclassico"
-              width={36}
-              height={36}
-              className="h-9 w-9 rounded-full object-cover ring-1 ring-border transition-transform duration-500 group-hover:rotate-12"
-            />
-            <span className="font-display text-xl tracking-wide text-foreground">
-              Elclassico
-            </span>
-          </Link>
+          <div className="flex items-center gap-2">
+            <SidebarTrigger className="hidden md:inline-flex -ml-1 text-foreground/80 hover:text-foreground hover:bg-transparent" />
+            <Link to="/" className="flex items-center gap-2 group">
+              <img
+                src={logo.url}
+                alt="Elclassico"
+                width={36}
+                height={36}
+                className="h-9 w-9 rounded-full object-cover ring-1 ring-border transition-transform duration-500 group-hover:rotate-12"
+              />
+              <span className="font-display text-xl tracking-wide text-foreground">
+                Elclassico
+              </span>
+            </Link>
+          </div>
 
           <ul className="hidden md:flex items-center gap-8">
             {links.map((l) => (
@@ -117,6 +121,7 @@ export function SiteNav() {
                 </span>
               )}
             </Link>
+            <SidebarTrigger className="text-foreground/80 hover:text-foreground hover:bg-transparent" />
             <button
               className="p-2 -mr-2 text-foreground"
               aria-label="Menu"
