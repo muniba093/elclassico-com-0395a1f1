@@ -121,6 +121,7 @@ export function SiteNav() {
                 </span>
               )}
             </Link>
+            <SidebarTrigger className="text-foreground/80 hover:text-foreground hover:bg-transparent" />
             <button
               className="p-2 -mr-2 text-foreground"
               aria-label="Menu"
