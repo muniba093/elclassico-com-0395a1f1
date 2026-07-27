@@ -4,7 +4,6 @@ import { z } from "zod";
 import { Eye, EyeOff } from "lucide-react";
 import { SiteNav } from "@/components/SiteNav";
 import { supabase } from "@/integrations/supabase/client";
-import { lovable } from "@/integrations/lovable";
 import { useAuth } from "@/lib/auth";
 import { toast } from "sonner";
 
@@ -69,20 +68,25 @@ function AuthPage() {
     }
   }
 
-  async function googleSignIn() {
-    setGoogleLoading(true);
-    try {
-      const result = await lovable.auth.signInWithOAuth("google", {
-        redirect_uri: window.location.origin,
-      });
-      if (result.error) throw result.error;
-      if (result.redirected) return;
-    } catch (err: any) {
-      toast.error(err?.message ?? "Google sign-in failed");
-    } finally {
-      setGoogleLoading(false);
-    }
+ async function googleSignIn() {
+  setGoogleLoading(true);
+
+  try {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: window.location.origin,
+      },
+    });
+
+    if (error) throw error;
+
+  } catch (err: any) {
+    toast.error(err?.message ?? "Google sign-in failed");
+  } finally {
+    setGoogleLoading(false);
   }
+}
 
   return (
     <div className="bg-background text-foreground min-h-screen">
