@@ -55,6 +55,10 @@ function MenuPage() {
     queryKey: ["menu_items"],
     queryFn: async () => {
       const { data, error } = await supabase.from("menu_items").select("*").eq("available", true);
+       console.log("MENU DATA:", data);
+    console.log("MENU ERROR:", error);
+
+      
       if (error) throw error;
       return data as MenuItem[];
     },
