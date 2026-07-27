@@ -45,11 +45,27 @@ function AdminOrders() {
     return () => { supabase.removeChannel(ch); };
   }, [qc]);
 
-  async function updateStatus(id: string, status: string) {
-    const { error } = await supabase.from("orders").update({ status: status as any }).eq("id", id);
-    if (error) toast.error(error.message);
-    else toast.success("Status updated");
+ async function updateStatus(id: string, status: string) {
+  const { data, error } = await supabase
+    .from("orders")
+    .update({ status: status as any })
+    .eq("id", id)
+    .select();
+
+  if (error) {
+    toast.error(error.message);
+    return;
   }
+
+  if (!data || data.length === 0) {
+    toast.error("Order was not updated.");
+    return;
+  }
+
+  await qc.invalidateQueries({ queryKey: ["admin-orders"] });
+
+  toast.success("Status updated");
+}
 
   const stats = (q.data ?? []).reduce(
     (a, o) => {
