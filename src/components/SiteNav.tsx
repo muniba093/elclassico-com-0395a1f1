@@ -5,6 +5,7 @@ import logo from "@/assets/fb-img-1781243515658.jpg.asset.json";
 import { useCart } from "@/lib/cart";
 import { useAuth } from "@/lib/auth";
 import { useSiteSettings } from "@/lib/site-settings";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 
 const links = [
   { to: "/", label: "Home" },
