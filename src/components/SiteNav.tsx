@@ -62,7 +62,7 @@ export function SiteNav() {
                 height={36}
                 className="h-9 w-9 rounded-full object-cover ring-1 ring-border transition-transform duration-500 group-hover:rotate-12"
               />
-              <span className="font-display text-xl tracking-wide text-foreground">
+              <span className="font-display text-xl tracking-wide text-gold text-foreground">
                 Crunzify
               </span>
             </Link>
