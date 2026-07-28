@@ -75,48 +75,74 @@ function HomePage() {
       <SiteNav />
 
       {/* HERO */}
-      <section className="relative min-h-[100svh] w-full overflow-hidden">
-       
-        <div className="absolute inset-0 bg-gradient-to-b from-charcoal-deep/70 via-charcoal-deep/45 to-charcoal-deep/85" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,transparent_30%,oklch(0.11_0.008_60/0.85))]" />
+<section className="relative min-h-[100svh] w-full overflow-hidden">
 
-        <div className="relative z-10 flex min-h-[100svh] items-center">
-          <div className="mx-auto max-w-7xl px-6 pt-32 pb-20 w-full">
-            <p className="reveal text-xs uppercase tracking-[0.4em] text-gold mb-6" style={{ animationDelay: "0.1s" }}>
-              Est. 2022 — Premium Cafe
-            </p>
-            <h1
-              className="reveal font-display text-ivory text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.02] max-w-4xl"
-              style={{ animationDelay: "0.25s" }}
-            >
-              Where Great Food <em className="not-italic text-gold">Meets</em> Great Moments
-            </h1>
-            <p
-              className="reveal mt-6 max-w-xl text-ivory/75 text-base sm:text-lg leading-relaxed"
-              style={{ animationDelay: "0.45s" }}
-            >
-              Experience exceptional flavors, handcrafted beverages, and a welcoming atmosphere designed for memorable moments.
-            </p>
-            <div
-              className="reveal mt-10 flex flex-wrap gap-3"
-              style={{ animationDelay: "0.65s" }}
-            >
-              <Link
-                to="/menu"
-                className="group inline-flex items-center gap-2 rounded-full bg-gradient-gold px-7 py-4 text-sm font-medium text-charcoal-deep shadow-gold transition-all hover:-translate-y-0.5"
-              >
-                Explore Menu
-                <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-              </Link>
-              <Link
-                to="/visit"
-                className="inline-flex items-center gap-2 rounded-full glass-dark px-7 py-4 text-sm font-medium text-ivory hover:bg-ivory/10 transition-colors"
-              >
-                Visit Us
-              </Link>
-            </div>
-          </div>
-        </div>
+  {/* Animated Background Image */}
+  <style>
+    {`
+      @keyframes heroZoom {
+        0% {
+          transform: scale(1);
+        }
+        100% {
+          transform: scale(1.08);
+        }
+      }
+
+      .hero-bg-animation {
+        animation: heroZoom 15s ease-in-out infinite alternate;
+      }
+    `}
+  </style>
+
+  <div
+    className="absolute inset-0 bg-cover bg-center hero-bg-animation"
+    style={{
+      backgroundImage: `url(${hero})`,
+    }}
+  />
+
+  {/* Overlay */}
+  <div className="absolute inset-0 bg-gradient-to-b from-charcoal-deep/50 via-charcoal-deep/30 to-charcoal-deep/75" />
+
+  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,transparent_30%,oklch(0.11_0.008_60/0.85))]" />
+
+  {/* Content */}
+  <div className="relative z-10 flex min-h-[100svh] items-center">
+    <div className="mx-auto max-w-7xl px-6 pt-32 pb-20 w-full">
+
+      <p className="reveal text-xs uppercase tracking-[0.4em] text-gold mb-6">
+        Est. 2022 — Premium Cafe
+      </p>
+
+      <h1 className="reveal font-display text-ivory text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.02] max-w-4xl">
+        Where Great Food <em className="not-italic text-gold">Meets</em> Great Moments
+      </h1>
+
+      <p className="reveal mt-6 max-w-xl text-ivory/75 text-base sm:text-lg leading-relaxed">
+        Experience exceptional flavors, handcrafted beverages, and a welcoming atmosphere designed for memorable moments.
+      </p>
+
+      <div className="reveal mt-10 flex flex-wrap gap-3">
+        <Link
+          to="/menu"
+          className="group inline-flex items-center gap-2 rounded-full bg-gradient-gold px-7 py-4 text-sm font-medium text-charcoal-deep shadow-gold transition-all hover:-translate-y-0.5"
+        >
+          Explore Menu
+          <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+        </Link>
+
+        <Link
+          to="/visit"
+          className="inline-flex items-center gap-2 rounded-full glass-dark px-7 py-4 text-sm font-medium text-ivory hover:bg-ivory/10 transition-colors"
+        >
+          Visit Us
+        </Link>
+      </div>
+
+    </div>
+
+
 
         {/* Scroll hint */}
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-ivory/50 text-[10px] uppercase tracking-[0.4em]">
