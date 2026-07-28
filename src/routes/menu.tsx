@@ -131,7 +131,7 @@ function MenuPage() {
       <section className="py-12">
         <div className="mx-auto max-w-7xl px-6">
           {itemsQ.isLoading ? (
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+           <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               {Array.from({ length: 6 }).map((_, i) => (
                 <div key={i} className="rounded-3xl bg-card border border-border h-80 animate-pulse" />
               ))}
@@ -168,7 +168,7 @@ function MenuPage() {
                   <div className="p-6 flex-1 flex flex-col">
                     <h3 className="font-display text-2xl">{it.name}</h3>
                     <p className="mt-2 text-sm text-muted-foreground leading-relaxed line-clamp-2 flex-1">{it.description}</p>
-                    <div className="mt-5 flex items-center justify-between">
+                   <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                       <span className="font-display text-2xl text-foreground">{formatPKR(Number(it.price))}</span>
                       <button
                         onClick={() => {

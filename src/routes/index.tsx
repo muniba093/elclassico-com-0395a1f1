@@ -141,7 +141,7 @@ function HomePage() {
       </div>
 
     </div>
-
+</div>
 
 
         {/* Scroll hint */}
@@ -149,6 +149,7 @@ function HomePage() {
           Scroll
         </div>
       </section>
+
 
       {/* HIGHLIGHTS */}
       <section className="py-24 sm:py-32">
