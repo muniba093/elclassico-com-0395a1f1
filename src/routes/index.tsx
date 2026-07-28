@@ -136,7 +136,7 @@ function HomePage() {
               <div
                 key={h.title}
                 className="group relative rounded-3xl border border-border bg-card p-7 shadow-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-lift"
-                style={{ animationDelay: `${i * 0.1}s` color: }}
+                style={{ animationDelay: `${i * 0.1}s`  }}
               >
                 <div className="h-12 w-12 rounded-2xl bg-gradient-gold flex items-center justify-center text-charcoal-deep shadow-soft">
                   <h.icon size={20} />

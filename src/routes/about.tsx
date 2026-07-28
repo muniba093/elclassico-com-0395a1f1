@@ -92,6 +92,7 @@ function AboutPage() {
             <p className="text-xs uppercase tracking-[0.3em] text-gold">Gallery</p>
             <h2 className="mt-3 font-display text-4xl sm:text-5xl">A look inside.</h2>
          </div>
+         </div>
       </section>
 
       <SiteFooter />

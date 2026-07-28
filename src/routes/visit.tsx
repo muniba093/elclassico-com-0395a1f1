@@ -101,7 +101,8 @@ function VisitPage() {
             <a href="#" className="inline-flex items-center gap-2 rounded-full bg-foreground text-background px-6 py-3 text-sm font-medium hover:shadow-gold transition-shadow">
               <Instagram size={16} /> Follow Us
             </a>
-         
+         </div>
+         </div>
       </section>
 
       <SiteFooter />
