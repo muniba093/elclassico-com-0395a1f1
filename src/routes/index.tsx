@@ -3,7 +3,7 @@ import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Leaf, Coffee, Sparkles, HeartHandshake, Star, ArrowRight, MapPin, Instagram } from "lucide-react";
 import hero from "@/assets/hero-ambiance.jpg";
-import latte from "@/assets/latte.webp"; 
+import latte from "@/assets/hero-ambiance.jpg"; 
 import green from "@/assets/wa-1781243603218.jpeg.asset.json";
 import sandwich from "@/assets/wa-1781244115847.jpeg.asset.json";
 import burger from "@/assets/double-classic-burger.jpg.asset.json";
