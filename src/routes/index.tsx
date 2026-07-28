@@ -2,15 +2,15 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Leaf, Coffee, Sparkles, HeartHandshake, Star, ArrowRight, MapPin, Instagram } from "lucide-react";
-import hero from "@/assets/hero-ambiance.jpg";
-import latte from "@/assets/hero-ambiance.jpg"; 
-import green from "@/assets/wa-1781243603218.jpeg.asset.json";
-import sandwich from "@/assets/wa-1781244115847.jpeg.asset.json";
-import burger from "@/assets/double-classic-burger.jpg.asset.json";
-import wrap from "@/assets/a2bd3bbd-dc18-4eef-a6d7-e990c9afdbca.jpeg.asset.json";
-import cake from "@/assets/1652974718-cxvjhw.webp.asset.json";
-import pizzaAsset from "@/assets/img-20260612-wa0000.jpg.asset.json";
-import storefront from "@/assets/fb-img-1781243476949.jpg.asset.json";
+import hero from "@/assets/hero-ambiance.jpg"; 
+import latte from "@/assets/latte.webp";
+import green from "@/assets/green-drink.jpg";
+import sandwich from "@/assets/premium-club-sandwich.jpg";
+import burger from "@/assets/burger.jpg";
+import wrap from "@/assets/premium-wrap.jpg";
+import cake from "@/assets/Choclate-cake.jpg";
+import pizzaAsset from "@/assets/premium-pizza.jpg";
+import storefront from "@/assets/premium-cafe-storefront.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -47,12 +47,12 @@ const highlights = [
 ];
 
 const picks = [
-  { img: latte.url, name: "Signature Latte", tag: "House Blend" },
-  { img: green.url, name: "Ultimate Green", tag: "Cold Pressed" },
-  { img: sandwich.url, name: "Classic Club", tag: "Bestseller" },
-  { img: burger.url, name: "Double Classic Burger", tag: "Crowd Favourite" },
-  { img: wrap.url, name: "Spicy Wrap", tag: "Chef's Pick" },
-  { img: cake.url, name: "Chocolate Indulgence", tag: "Patisserie" },
+  { img: latte, name: "Signature Latte", tag: "House Blend" },
+  { img: green, name: "Ultimate Green", tag: "Cold Pressed" },
+  { img: sandwich, name: "Classic Club", tag: "Bestseller" },
+  { img: burger, name: "Double Classic Burger", tag: "Crowd Favourite" },
+  { img: wrap, name: "Spicy Wrap", tag: "Chef's Pick" },
+  { img: cake, name: "Chocolate Indulgence", tag: "Patisserie" },
 ];
 
 const why = [
@@ -76,13 +76,7 @@ function HomePage() {
 
       {/* HERO */}
       <section className="relative min-h-[100svh] w-full overflow-hidden">
-        <img
-          src={hero}
-          alt="Crunzify cafe interior"
-          width={1920}
-          height={1280}
-          className="absolute inset-0 h-full w-full object-cover scale-105 animate-float"
-        />
+       
         <div className="absolute inset-0 bg-gradient-to-b from-charcoal-deep/70 via-charcoal-deep/45 to-charcoal-deep/85" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,transparent_30%,oklch(0.11_0.008_60/0.85))]" />
 
@@ -142,7 +136,7 @@ function HomePage() {
               <div
                 key={h.title}
                 className="group relative rounded-3xl border border-border bg-card p-7 shadow-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-lift"
-                style={{ animationDelay: `${i * 0.1}s` }}
+                style={{ animationDelay: `${i * 0.1}s` color: }}
               >
                 <div className="h-12 w-12 rounded-2xl bg-gradient-gold flex items-center justify-center text-charcoal-deep shadow-soft">
                   <h.icon size={20} />
@@ -198,7 +192,7 @@ function HomePage() {
         <div className="mx-auto max-w-7xl px-6 grid lg:grid-cols-2 gap-16 items-center">
           <div className="relative">
             <img
-              src={pizzaAsset.url}
+              src={pizzaAsset}
               alt="Wood-fired pizza"
               loading="lazy"
               className="rounded-3xl object-cover w-full aspect-[4/5] shadow-lift"
@@ -274,7 +268,7 @@ function HomePage() {
           </div>
 
           <div className="mt-12 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
-            {[latte.url, green.url, sandwich.url, burger.url, wrap.url, cake.url].map((src, i) => (
+            {[latte, green, sandwich, burger, wrap, cake].map((src, i) => (
               <a
                 key={i}
                 href="#"
@@ -295,7 +289,7 @@ function HomePage() {
         <div className="mx-auto max-w-7xl px-6">
           <div
             className="relative overflow-hidden rounded-[2rem] p-10 sm:p-16 text-center"
-            style={{ backgroundImage: `linear-gradient(180deg, oklch(0.18 0.012 60 / 0.78), oklch(0.11 0.008 60 / 0.92)), url(${storefront.url})`, backgroundSize: "cover", backgroundPosition: "center" }}
+            style={{ backgroundImage: `linear-gradient(180deg, oklch(0.18 0.012 60 / 0.78), oklch(0.11 0.008 60 / 0.92)), url(${storefront})`, backgroundSize: "cover", backgroundPosition: "center" }}
           >
             <h2 className="font-display text-4xl sm:text-6xl text-ivory max-w-3xl mx-auto">
               Ready for your next favorite meal?
