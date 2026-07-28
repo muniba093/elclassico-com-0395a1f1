@@ -5,12 +5,12 @@ import { Leaf, Coffee, Sparkles, HeartHandshake, Star, ArrowRight, MapPin, Insta
 import hero from "@/assets/hero-ambiance.jpg"; 
 import latte from "@/assets/latte.webp";
 import green from "@/assets/green-drink.jpg";
-import sandwich from "@/assets/premium-club-sandwich.jpg";
+import sandwich from "@/assets/sandwich.jpg";
 import burger from "@/assets/burger.jpg";
-import wrap from "@/assets/premium-wrap.jpg";
+import wrap from "@/assets/wrap.jpg";
 import cake from "@/assets/Choclate-cake.jpg";
-import pizzaAsset from "@/assets/premium-pizza.jpg";
-import storefront from "@/assets/premium-cafe-storefront.jpg";
+import pizzaAsset from "@/assets/pizza.jpg";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -289,7 +289,7 @@ function HomePage() {
         <div className="mx-auto max-w-7xl px-6">
           <div
             className="relative overflow-hidden rounded-[2rem] p-10 sm:p-16 text-center"
-            style={{ backgroundImage: `linear-gradient(180deg, oklch(0.18 0.012 60 / 0.78), oklch(0.11 0.008 60 / 0.92)), url(${storefront})`, backgroundSize: "cover", backgroundPosition: "center" }}
+            style={{ backgroundImage: `linear-gradient(180deg, oklch(0.18 0.012 60 / 0.78), oklch(0.11 0.008 60 / 0.92)), url(${latte})`, backgroundSize: "cover", backgroundPosition: "center" }}
           >
             <h2 className="font-display text-4xl sm:text-6xl text-ivory max-w-3xl mx-auto">
               Ready for your next favorite meal?
