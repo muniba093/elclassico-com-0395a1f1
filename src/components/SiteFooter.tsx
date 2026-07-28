@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, Facebook, MapPin, Phone, Mail } from "lucide-react";
-import logo from "@/assets/fb-img-1781243515658.jpg.asset.json";
+import logo from "@/assets/logo.png";
 
 export function SiteFooter() {
   return (
@@ -9,7 +9,7 @@ export function SiteFooter() {
       <div className="mx-auto max-w-7xl px-6 py-16 grid gap-12 md:grid-cols-4">
         <div>
           <div className="flex items-center gap-3">
-            <img src={logo.url} alt="" width={40} height={40} className="h-10 w-10 rounded-full object-cover" />
+            <img src={logo} alt="" width={40} height={40} className="h-10 w-10 rounded-full object-cover" />
             <span className="font-display text-2xl text-ivory">Crunzify</span>
           </div>
           <p className="mt-4 text-sm text-ivory/60 leading-relaxed">

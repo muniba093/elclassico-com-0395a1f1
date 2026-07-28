@@ -2,12 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { MapPin, Phone, ShoppingBag, Bike, Clock, Instagram } from "lucide-react";
-import latte from "@/assets/wa-1781243720627.jpeg.asset.json";
-import green from "@/assets/wa-1781243603218.jpeg.asset.json";
-import sandwich from "@/assets/wa-1781244115847.jpeg.asset.json";
-import burger from "@/assets/double-classic-burger.jpg.asset.json";
-import wrap from "@/assets/a2bd3bbd-dc18-4eef-a6d7-e990c9afdbca.jpeg.asset.json";
-import cake from "@/assets/1652974718-cxvjhw.webp.asset.json";
 
 export const Route = createFileRoute("/visit")({
   head: () => ({
@@ -107,15 +101,7 @@ function VisitPage() {
             <a href="#" className="inline-flex items-center gap-2 rounded-full bg-foreground text-background px-6 py-3 text-sm font-medium hover:shadow-gold transition-shadow">
               <Instagram size={16} /> Follow Us
             </a>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-            {[latte.url, green.url, sandwich.url, burger.url, wrap.url, cake.url].map((src, i) => (
-              <a key={i} href="#" className="group relative aspect-square overflow-hidden rounded-2xl">
-                <img src={src} loading="lazy" alt="" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
-              </a>
-            ))}
-          </div>
-        </div>
+         
       </section>
 
       <SiteFooter />

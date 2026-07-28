@@ -266,21 +266,6 @@ function HomePage() {
               <Instagram size={16} /> Follow on Instagram
             </a>
           </div>
-
-          <div className="mt-12 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
-            {[latte, green, sandwich, burger, wrap, cake].map((src, i) => (
-              <a
-                key={i}
-                href="#"
-                className="group relative aspect-square overflow-hidden rounded-2xl"
-              >
-                <img src={src} loading="lazy" alt="" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                <div className="absolute inset-0 bg-charcoal-deep/0 group-hover:bg-charcoal-deep/40 transition-colors flex items-center justify-center">
-                  <Instagram size={20} className="text-ivory opacity-0 group-hover:opacity-100 transition-opacity" />
-                </div>
-              </a>
-            ))}
-          </div>
         </div>
       </section>
 

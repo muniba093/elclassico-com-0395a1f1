@@ -24,7 +24,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { useAuth } from "@/lib/auth";
-import logo from "@/assets/fb-img-1781243515658.jpg.asset.json";
+import logo from "@/assets/logo.png";
 
 const mainLinks = [
   { title: "Home", url: "/", icon: Home },
@@ -51,14 +51,14 @@ export function AppSidebar() {
           className="flex items-center gap-3 rounded-xl p-1 transition-colors hover:bg-sidebar-accent/50"
         >
           <img
-            src={logo.url}
+            src={logo}
             alt="Crunzify"
             width={36}
             height={36}
             className="h-8 w-8 rounded-full object-cover ring-1 ring-sidebar-border"
           />
           {!collapsed && (
-            <span className="font-display text-lg tracking-wide text-sidebar-foreground">
+            <span className="font-display text-lg tracking-wide text-gold  text-sidebar-foreground">
               Crunzify
             </span>
           )}

@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X, ShoppingBag, User } from "lucide-react";
-import logo from "@/assets/fb-img-1781243515658.jpg.asset.json";
+import logo from "@/assets/logo.png";
 import { useCart } from "@/lib/cart";
 import { useAuth } from "@/lib/auth";
 import { useSiteSettings } from "@/lib/site-settings";
@@ -56,7 +56,7 @@ export function SiteNav() {
             <SidebarTrigger className="hidden md:inline-flex -ml-1 text-foreground/80 hover:text-foreground hover:bg-transparent" />
             <Link to="/" className="flex items-center gap-2 group">
               <img
-                src={logo.url}
+                src={logo}
                 alt="Crunzify"
                 width={36}
                 height={36}

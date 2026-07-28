@@ -1,13 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
-import storefront from "@/assets/fb-img-1781243476949.jpg.asset.json";
-import latte from "@/assets/wa-1781243720627.jpeg.asset.json";
-import green from "@/assets/wa-1781243603218.jpeg.asset.json";
-import sandwich from "@/assets/wa-1781244115847.jpeg.asset.json";
-import burger from "@/assets/double-classic-burger.jpg.asset.json";
-import cake from "@/assets/1652974718-cxvjhw.webp.asset.json";
-import pizza from "@/assets/img-20260612-wa0000.jpg.asset.json";
+import storefront from "@/assets/store-front.jpg";
+
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -96,23 +91,7 @@ function AboutPage() {
           <div className="mb-10">
             <p className="text-xs uppercase tracking-[0.3em] text-gold">Gallery</p>
             <h2 className="mt-3 font-display text-4xl sm:text-5xl">A look inside.</h2>
-          </div>
-          <div className="columns-2 md:columns-3 gap-4 [&>*]:mb-4">
-            {[
-              { src: latte.url, ratio: "aspect-[4/5]" },
-              { src: pizza.url, ratio: "aspect-square" },
-              { src: green.url, ratio: "aspect-[3/4]" },
-              { src: burger.url, ratio: "aspect-[5/4]" },
-              { src: sandwich.url, ratio: "aspect-[3/4]" },
-              { src: cake.url, ratio: "aspect-square" },
-              { src: storefront.url, ratio: "aspect-[4/3]" },
-            ].map((g, i) => (
-              <div key={i} className={`overflow-hidden rounded-2xl ${g.ratio} break-inside-avoid`}>
-                <img src={g.src} loading="lazy" alt="" className="h-full w-full object-cover hover:scale-105 transition-transform duration-700" />
-              </div>
-            ))}
-          </div>
-        </div>
+         </div>
       </section>
 
       <SiteFooter />
