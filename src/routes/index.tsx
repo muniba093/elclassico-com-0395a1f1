@@ -3,7 +3,7 @@ import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Leaf, Coffee, Sparkles, HeartHandshake, Star, ArrowRight, MapPin, Instagram } from "lucide-react";
 import hero from "@/assets/hero-ambiance.jpg";
-import latte from "@/assets/wa-1781243720627.jpeg.asset.json";
+import latte from "src\assets\latte.webp";
 import green from "@/assets/wa-1781243603218.jpeg.asset.json";
 import sandwich from "@/assets/wa-1781244115847.jpeg.asset.json";
 import burger from "@/assets/double-classic-burger.jpg.asset.json";
@@ -15,9 +15,9 @@ import storefront from "@/assets/fb-img-1781243476949.jpg.asset.json";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Elclassico — Where Great Food Meets Great Moments" },
+      { title: "Crunzify — Where Great Food Meets Great Moments" },
       { name: "description", content: "A premium cafe serving handcrafted beverages, fresh food and a warm, welcoming atmosphere designed for memorable moments." },
-      { property: "og:title", content: "Elclassico — Premium Cafe" },
+      { property: "og:title", content: "Crunzify — Premium Cafe" },
       { property: "og:description", content: "Handcrafted beverages, fresh food, cozy ambience." },
       { property: "og:url", content: "/" },
     ],
@@ -28,7 +28,7 @@ export const Route = createFileRoute("/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "CafeOrCoffeeShop",
-          name: "Elclassico",
+          name: "Crunzify",
           servesCuisine: ["Cafe", "Coffee", "Sandwiches", "Burgers"],
           priceRange: "$$",
           url: "/",
@@ -78,7 +78,7 @@ function HomePage() {
       <section className="relative min-h-[100svh] w-full overflow-hidden">
         <img
           src={hero}
-          alt="Elclassico cafe interior"
+          alt="Crunzify cafe interior"
           width={1920}
           height={1280}
           className="absolute inset-0 h-full w-full object-cover scale-105 animate-float"
@@ -134,7 +134,7 @@ function HomePage() {
       <section className="py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6">
           <div className="max-w-2xl">
-            <p className="text-xs uppercase tracking-[0.3em] text-gold">The Elclassico Standard</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-gold">The Crunzify Standard</p>
             <h2 className="mt-3 font-display text-4xl sm:text-5xl">Crafted in every detail.</h2>
           </div>
           <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -261,7 +261,7 @@ function HomePage() {
         <div className="mx-auto max-w-7xl px-6">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-gold">@elclassico</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-gold">@crunzify</p>
               <h2 className="mt-3 font-display text-4xl sm:text-5xl">Follow our journey.</h2>
               <p className="mt-3 text-muted-foreground max-w-md">Stay connected and discover our latest creations.</p>
             </div>

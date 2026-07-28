@@ -11,7 +11,7 @@ import emailjs from "@emailjs/browser";
 
 export const Route = createFileRoute("/checkout")({
   head: () => ({
-    meta: [{ title: "Checkout — Elclassico" }, { name: "description", content: "Complete your order." }],
+    meta: [{ title: "Checkout — Crunzify" }, { name: "description", content: "Complete your order." }],
   }),
   component: CheckoutPage,
 });

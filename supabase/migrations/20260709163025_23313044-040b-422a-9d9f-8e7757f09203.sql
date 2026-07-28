@@ -2,7 +2,7 @@
 -- SITE SETTINGS (single row)
 CREATE TABLE public.site_settings (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  restaurant_name text NOT NULL DEFAULT 'Elclassico',
+  restaurant_name text NOT NULL DEFAULT 'Crunzify',
   address text NOT NULL DEFAULT '',
   phone text NOT NULL DEFAULT '',
   contact_email text NOT NULL DEFAULT '',

@@ -52,14 +52,14 @@ export function AppSidebar() {
         >
           <img
             src={logo.url}
-            alt="Elclassico"
+            alt="Crunzify"
             width={36}
             height={36}
             className="h-8 w-8 rounded-full object-cover ring-1 ring-sidebar-border"
           />
           {!collapsed && (
             <span className="font-display text-lg tracking-wide text-sidebar-foreground">
-              Elclassico
+              Crunzify
             </span>
           )}
         </Link>
@@ -147,7 +147,7 @@ export function AppSidebar() {
       <SidebarFooter className="p-3">
         {!collapsed && (
           <p className="text-[10px] text-sidebar-foreground/50 leading-tight">
-            &copy; {new Date().getFullYear()} Elclassico. All rights reserved.
+            &copy; {new Date().getFullYear()} Crunzify. All rights reserved.
           </p>
         )}
       </SidebarFooter>

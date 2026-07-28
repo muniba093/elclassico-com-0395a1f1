@@ -9,7 +9,7 @@ import { toast } from "sonner";
 
 export const Route = createFileRoute("/auth")({
   head: () => ({
-    meta: [{ title: "Sign In — Elclassico" }, { name: "description", content: "Sign in or create an Elclassico account to order." }],
+    meta: [{ title: "Sign In — Crunzify" }, { name: "description", content: "Sign in or create an Crunzify account to order." }],
   }),
   component: AuthPage,
 });

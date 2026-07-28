@@ -57,13 +57,13 @@ export function SiteNav() {
             <Link to="/" className="flex items-center gap-2 group">
               <img
                 src={logo.url}
-                alt="Elclassico"
+                alt="Crunzify"
                 width={36}
                 height={36}
                 className="h-9 w-9 rounded-full object-cover ring-1 ring-border transition-transform duration-500 group-hover:rotate-12"
               />
               <span className="font-display text-xl tracking-wide text-foreground">
-                Elclassico
+                Crunzify
               </span>
             </Link>
           </div>

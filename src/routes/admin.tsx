@@ -4,7 +4,7 @@ import { SiteNav } from "@/components/SiteNav";
 import { useAuth } from "@/lib/auth";
 
 export const Route = createFileRoute("/admin")({
-  head: () => ({ meta: [{ title: "Admin — Elclassico" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({ meta: [{ title: "Admin — Crunzify" }, { name: "robots", content: "noindex" }] }),
   component: AdminLayout,
 });
 

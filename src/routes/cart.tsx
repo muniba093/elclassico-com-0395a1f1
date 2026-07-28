@@ -7,7 +7,7 @@ import { useCart, formatPKR } from "@/lib/cart";
 export const Route = createFileRoute("/cart")({
   head: () => ({
     meta: [
-      { title: "Your Cart — Elclassico" },
+      { title: "Your Cart — Crunzify" },
       { name: "description", content: "Review your order before checkout." },
     ],
   }),

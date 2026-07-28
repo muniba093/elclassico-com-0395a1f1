@@ -10,7 +10,7 @@ export function SiteFooter() {
         <div>
           <div className="flex items-center gap-3">
             <img src={logo.url} alt="" width={40} height={40} className="h-10 w-10 rounded-full object-cover" />
-            <span className="font-display text-2xl text-ivory">Elclassico</span>
+            <span className="font-display text-2xl text-ivory">Crunzify</span>
           </div>
           <p className="mt-4 text-sm text-ivory/60 leading-relaxed">
             Where great food meets great moments. Crafted with care since 2022.
@@ -32,7 +32,7 @@ export function SiteFooter() {
           <ul className="space-y-3 text-sm text-ivory/80">
             <li className="flex gap-2"><MapPin size={16} className="mt-0.5 text-gold shrink-0" /> Add cafe address here</li>
             <li className="flex gap-2"><Phone size={16} className="mt-0.5 text-gold shrink-0" /> +00 000 000 0000</li>
-            <li className="flex gap-2"><Mail size={16} className="mt-0.5 text-gold shrink-0" /> hello@elclassico.com</li>
+            <li className="flex gap-2"><Mail size={16} className="mt-0.5 text-gold shrink-0" /> hello@crunzify.com</li>
           </ul>
         </div>
 
@@ -47,7 +47,7 @@ export function SiteFooter() {
       </div>
       <div className="border-t border-ivory/10">
         <div className="mx-auto max-w-7xl px-6 py-6 flex flex-col md:flex-row gap-2 justify-between text-xs text-ivory/50">
-          <p>© {new Date().getFullYear()} Elclassico Coffee. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Crunzify Coffee. All rights reserved.</p>
           <p className="tracking-wider uppercase">Est. 2022 — Crafted with care</p>
         </div>
       </div>

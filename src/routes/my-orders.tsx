@@ -9,7 +9,7 @@ import { formatPKR } from "@/lib/cart";
 import { STATUS_LABEL, STATUS_TONE } from "@/lib/order-status";
 
 export const Route = createFileRoute("/my-orders")({
-  head: () => ({ meta: [{ title: "My Orders — Elclassico" }] }),
+  head: () => ({ meta: [{ title: "My Orders — Crunzify" }] }),
   component: MyOrders,
 });
 

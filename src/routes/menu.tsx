@@ -11,9 +11,9 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/menu")({
   head: () => ({
     meta: [
-      { title: "Menu — Order Online | Elclassico" },
-      { name: "description", content: "Order Pakistani BBQ, biryani, burgers, pizza, wraps and more online from Elclassico. Fast delivery." },
-      { property: "og:title", content: "Menu — Order Online | Elclassico" },
+      { title: "Menu — Order Online | Crunzify" },
+      { name: "description", content: "Order Pakistani BBQ, biryani, burgers, pizza, wraps and more online from Crunzify. Fast delivery." },
+      { property: "og:title", content: "Menu — Order Online | Crunzify" },
       { property: "og:description", content: "Order Pakistani BBQ, biryani, burgers, pizza, wraps and more online." },
       { property: "og:url", content: "/menu" },
     ],

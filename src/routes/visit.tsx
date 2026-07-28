@@ -12,9 +12,9 @@ import cake from "@/assets/1652974718-cxvjhw.webp.asset.json";
 export const Route = createFileRoute("/visit")({
   head: () => ({
     meta: [
-      { title: "Visit Us — Elclassico" },
-      { name: "description", content: "Find Elclassico — address, opening hours, contact, directions, pickup and delivery." },
-      { property: "og:title", content: "Visit Elclassico" },
+      { title: "Visit Us — Crunzify" },
+      { name: "description", content: "Find Crunzify — address, opening hours, contact, directions, pickup and delivery." },
+      { property: "og:title", content: "Visit Crunzify" },
       { property: "og:description", content: "Come say hello — find us, call us, or order pickup & delivery." },
       { property: "og:url", content: "/visit" },
     ],
@@ -37,7 +37,7 @@ function VisitPage() {
       <section className="pt-40 pb-12">
         <div className="mx-auto max-w-7xl px-6 text-center">
           <p className="text-xs uppercase tracking-[0.4em] text-gold">Visit Us</p>
-          <h1 className="mt-3 font-display text-5xl sm:text-7xl">Visit Elclassico</h1>
+          <h1 className="mt-3 font-display text-5xl sm:text-7xl">Visit Crunzify</h1>
           <p className="mt-4 max-w-xl mx-auto text-muted-foreground">
             We'd love to host you. Drop in for a coffee, a quick bite, or a long, unhurried evening.
           </p>
@@ -49,7 +49,7 @@ function VisitPage() {
         <div className="mx-auto max-w-7xl px-6 grid lg:grid-cols-5 gap-6">
           <div className="lg:col-span-3 rounded-3xl overflow-hidden shadow-lift border border-border h-[420px]">
             <iframe
-              title="Elclassico location"
+              title="Crunzify location"
               src="https://www.openstreetmap.org/export/embed.html?bbox=-0.1485%2C51.5034%2C-0.1245%2C51.5174&amp;layer=mapnik"
               className="w-full h-full"
               loading="lazy"
@@ -63,7 +63,7 @@ function VisitPage() {
             <div className="hairline" />
             <div className="space-y-3">
               <p className="flex items-center gap-3 text-sm"><Phone size={16} className="text-gold" /> [Add phone number]</p>
-              <p className="flex items-center gap-3 text-sm"><MapPin size={16} className="text-gold" /> hello@elclassico.com</p>
+              <p className="flex items-center gap-3 text-sm"><MapPin size={16} className="text-gold" /> hello@crunzify.com</p>
             </div>
             <div className="grid grid-cols-2 gap-2 mt-auto">
               <ActionBtn icon={MapPin} label="Get Directions" />
@@ -101,7 +101,7 @@ function VisitPage() {
         <div className="mx-auto max-w-7xl px-6">
           <div className="flex flex-wrap items-end justify-between gap-6 mb-10">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-gold">@elclassico</p>
+              <p className="text-xs uppercase tracking-[0.3em] text-gold">@crunzify</p>
               <h2 className="mt-2 font-display text-4xl sm:text-5xl">Latest from the gram.</h2>
             </div>
             <a href="#" className="inline-flex items-center gap-2 rounded-full bg-foreground text-background px-6 py-3 text-sm font-medium hover:shadow-gold transition-shadow">

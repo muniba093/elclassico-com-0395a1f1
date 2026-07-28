@@ -12,9 +12,9 @@ import pizza from "@/assets/img-20260612-wa0000.jpg.asset.json";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — Elclassico" },
+      { title: "About — Crunzify" },
       { name: "description", content: "Our story: a love for food, quality ingredients, and creating memorable moments for our community." },
-      { property: "og:title", content: "About — Elclassico" },
+      { property: "og:title", content: "About — Crunzify" },
       { property: "og:description", content: "Passion for food. Crafted with care." },
       { property: "og:url", content: "/about" },
     ],
@@ -44,7 +44,7 @@ function AboutPage() {
             </h1>
           </div>
           <p className="text-muted-foreground text-lg leading-relaxed max-w-lg">
-            Elclassico started with a simple idea — that great food and great moments belong together. Every dish, every drink, every detail of our room is built around that belief.
+            Crunzify started with a simple idea — that great food and great moments belong together. Every dish, every drink, every detail of our room is built around that belief.
           </p>
         </div>
       </section>
@@ -53,7 +53,7 @@ function AboutPage() {
         <div className="mx-auto max-w-7xl px-6">
           <img
             src={storefront.url}
-            alt="Elclassico storefront at night"
+            alt="Crunzify storefront at night"
             loading="lazy"
             className="w-full h-[55vh] object-cover rounded-3xl shadow-lift"
           />
