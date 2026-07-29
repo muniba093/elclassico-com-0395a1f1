@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X, ShoppingBag, User } from "lucide-react";
 import logo from "@/assets/logo.png";
@@ -14,6 +14,8 @@ const links = [
   { to: "/visit", label: "Visit Us" },
 ] as const;
 
+const DARK_HERO_PATHS = ["/", "/menu"];
+
 export function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -21,6 +23,11 @@ export function SiteNav() {
   const { user, isAdmin } = useAuth();
   const { data: settings } = useSiteSettings();
   const closed = settings?.is_open === false;
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const onDarkHero = DARK_HERO_PATHS.includes(pathname);
+  const lightText = !scrolled;
+  const navText = lightText ? "text-ivory/80 hover:text-ivory" : "text-foreground/80 hover:text-foreground";
+  const navTextSolid = lightText ? "text-ivory" : "text-foreground";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -53,7 +60,7 @@ export function SiteNav() {
           }`}
         >
           <div className="flex items-center gap-2">
-            <SidebarTrigger className="hidden md:inline-flex -ml-1 text-foreground/80 hover:text-foreground hover:bg-transparent" />
+            <SidebarTrigger className={`hidden md:inline-flex -ml-1 hover:bg-transparent ${navText}`} />
             <Link to="/" className="flex items-center gap-2 group">
               <img
                 src={logo}
@@ -62,9 +69,13 @@ export function SiteNav() {
                 height={36}
                 className="h-9 w-9 rounded-full object-cover ring-1 ring-border transition-transform duration-500 group-hover:rotate-12"
               />
-              <span className="font-display text-xl tracking-wide text-gold text-foreground">
-                Crunzify
-              </span>
+            <span
+  className={`font-display text-xl tracking-wide transition-colors duration-300 ${
+    lightText ? "text-ivory" : "text-foreground"
+  }`}
+>
+  Crunzify
+</span>
             </Link>
           </div>
 
@@ -73,8 +84,8 @@ export function SiteNav() {
               <li key={l.to}>
                 <Link
                   to={l.to}
-                  className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors relative after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-accent after:transition-all hover:after:w-full"
-                  activeProps={{ className: "text-foreground after:w-full" }}
+                  className={`text-sm font-medium transition-colors relative after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-accent after:transition-all hover:after:w-full ${navText}`}
+                  activeProps={{ className: `${navTextSolid} after:w-full` }}
                   activeOptions={{ exact: l.to === "/" }}
                 >
                   {l.label}
@@ -86,13 +97,13 @@ export function SiteNav() {
           <div className="hidden md:block">
             <div className="flex items-center gap-3">
               {isAdmin && (
-                <Link to="/admin" className="text-sm font-medium text-foreground/80 hover:text-foreground">
+                <Link to="/admin" className={`text-sm font-medium ${navText}`}>
                   Admin
                 </Link>
               )}
               <Link
                 to={user ? "/my-orders" : "/auth"}
-                className="p-2 text-foreground/80 hover:text-foreground"
+                className={`p-2 ${navText}`}
                 aria-label={user ? "My orders" : "Sign in"}
               >
                 <User size={20} />
@@ -113,7 +124,7 @@ export function SiteNav() {
           </div>
 
           <div className="md:hidden flex items-center gap-1">
-            <Link to="/cart" className="relative p-2 text-foreground" aria-label="Cart">
+            <Link to="/cart" className={`relative p-2 ${navTextSolid}`} aria-label="Cart">
               <ShoppingBag size={20} />
               {count > 0 && (
                 <span className="absolute -top-0.5 -right-0.5 inline-flex items-center justify-center rounded-full bg-gold text-charcoal-deep text-[10px] font-semibold min-w-[18px] h-[18px] px-1">
@@ -121,9 +132,9 @@ export function SiteNav() {
                 </span>
               )}
             </Link>
-            <SidebarTrigger className="text-foreground/80 hover:text-foreground hover:bg-transparent" />
+            <SidebarTrigger className={`hover:bg-transparent ${navText}`} />
             <button
-              className="p-2 -mr-2 text-foreground"
+              className={`p-2 -mr-2 ${navTextSolid}`}
               aria-label="Menu"
               onClick={() => setOpen((o) => !o)}
             >

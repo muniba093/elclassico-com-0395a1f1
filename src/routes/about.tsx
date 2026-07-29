@@ -8,7 +8,7 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About — Crunzify" },
-      { name: "description", content: "Our story: a love for food, quality ingredients, and creating memorable moments for our community." },
+      { name: "description", content: "Our story: a love for food, quality , and creating memorable moments for our community." },
       { property: "og:title", content: "About — Crunzify" },
       { property: "og:description", content: "Passion for food. Crafted with care." },
       { property: "og:url", content: "/about" },
@@ -47,7 +47,7 @@ function AboutPage() {
       <section className="pb-24">
         <div className="mx-auto max-w-7xl px-6">
           <img
-            src={storefront.url}
+            src={storefront}
             alt="Crunzify storefront at night"
             loading="lazy"
             className="w-full h-[55vh] object-cover rounded-3xl shadow-lift"
