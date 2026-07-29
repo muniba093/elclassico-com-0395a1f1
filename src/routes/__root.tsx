@@ -136,7 +136,7 @@ function RootComponent() {
       <AuthProvider>
         <CartProvider>
           <SidebarProvider defaultOpen={false}>
-            <div className="min-h-screen flex w-full min-w-0">
+            <div className="min-h-screen flex w-full ">
               <AppSidebar />
               <div className="flex-1 flex flex-col ">
                 {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
