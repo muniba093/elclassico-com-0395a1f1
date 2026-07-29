@@ -25,7 +25,8 @@ export function SiteNav() {
   const closed = settings?.is_open === false;
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const onDarkHero = DARK_HERO_PATHS.includes(pathname);
-  const lightText = !scrolled;
+  const lightText =
+  (pathname === "/" || pathname === "/menu") && !scrolled;
   const navText = lightText ? "text-ivory/80 hover:text-ivory" : "text-foreground/80 hover:text-foreground";
   const navTextSolid = lightText ? "text-ivory" : "text-foreground";
 
