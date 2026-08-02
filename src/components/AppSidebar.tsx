@@ -9,6 +9,7 @@ import {
   Shield,
   LogOut,
   Package,
+  BookOpen,
 } from "lucide-react";
 import {
   Sidebar,
@@ -31,6 +32,7 @@ const mainLinks = [
   { title: "Menu", url: "/menu", icon: UtensilsCrossed },
   { title: "About Us", url: "/about", icon: Info },
   { title: "Visit Us", url: "/visit", icon: MapPin },
+  { title: "Blog", url: "/blog", icon: BookOpen },
 ] as const;
 
 export function AppSidebar() {

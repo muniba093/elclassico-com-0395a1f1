@@ -10,6 +10,7 @@ import burger from "@/assets/burger.jpg";
 import wrap from "@/assets/wrap.jpg";
 import cake from "@/assets/Choclate-cake.jpg";
 import pizzaAsset from "@/assets/pizza.jpg";
+import { useSiteSettings } from "@/lib/site-settings";
 
 
 export const Route = createFileRoute("/")({
@@ -70,6 +71,12 @@ const reviews = [
 ];
 
 function HomePage() {
+  const { data: settings } = useSiteSettings();
+  const heroImage = settings?.hero_image_url || hero;
+  const customPicks = (settings?.home_images ?? []).filter((p) => p?.image_url);
+  const cards = customPicks.length
+    ? customPicks.map((p) => ({ img: p.image_url, name: p.name, tag: p.tag }))
+    : picks;
   return (
     <div className="bg-background text-foreground">
       <SiteNav />
@@ -98,7 +105,7 @@ function HomePage() {
   <div
     className="absolute inset-0 bg-cover bg-center hero-bg-animation"
     style={{
-      backgroundImage: `url(${hero})`,
+      backgroundImage: `url(${heroImage})`,
     }}
   />
 
@@ -116,11 +123,12 @@ function HomePage() {
       </p>
 
       <h1 className="reveal font-display text-ivory text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.02] max-w-4xl">
-        Where Great Food <em className="not-italic text-gold">Meets</em> Great Moments
+        {settings?.hero_title || (<>Where Great Food <em className="not-italic text-gold">Meets</em> Great Moments</>)}
       </h1>
 
       <p className="reveal mt-6 max-w-xl text-ivory/75 text-base sm:text-lg leading-relaxed">
-        Experience exceptional flavors, handcrafted beverages, and a welcoming atmosphere designed for memorable moments.
+        {settings?.hero_subtitle ||
+          "Experience exceptional flavors, handcrafted beverages, and a welcoming atmosphere designed for memorable moments."}
       </p>
 
       <div className="reveal mt-10 flex flex-wrap gap-3">
@@ -190,7 +198,7 @@ function HomePage() {
           </div>
 
           <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {picks.map((p) => (
+            {cards.map((p) => (
               <article
                 key={p.name}
                 className="group relative overflow-hidden rounded-3xl shadow-soft bg-card"

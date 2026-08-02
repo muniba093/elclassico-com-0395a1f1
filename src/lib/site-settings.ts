@@ -3,6 +3,8 @@ import { supabase } from "@/integrations/supabase/client";
 
 export type OpeningHours = Record<"mon"|"tue"|"wed"|"thu"|"fri"|"sat"|"sun", string>;
 
+export type HomeImage = { image_url: string; name: string; tag: string };
+
 export type SiteSettings = {
   id: string;
   restaurant_name: string;
@@ -23,6 +25,13 @@ export type SiteSettings = {
   emailjs_template_id: string;
   emailjs_public_key: string;
   emailjs_enabled: boolean;
+  logo_url: string;
+  hero_image_url: string;
+  home_images: HomeImage[];
+  banner_enabled: boolean;
+  banner_text: string;
+  banner_cta_label: string;
+  banner_cta_link: string;
 };
 
 export function useSiteSettings() {

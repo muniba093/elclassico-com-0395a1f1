@@ -4,6 +4,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useSiteSettings, DAYS, type SiteSettings } from "@/lib/site-settings";
 import { toast } from "sonner";
+import { ImagePicker } from "@/components/admin/ImagePicker";
 
 export const Route = createFileRoute("/admin/settings")({
   component: AdminSettings,
@@ -45,6 +46,13 @@ function AdminSettings() {
       emailjs_template_id: form.emailjs_template_id,
       emailjs_public_key: form.emailjs_public_key,
       emailjs_enabled: form.emailjs_enabled,
+      logo_url: form.logo_url ?? "",
+      hero_image_url: form.hero_image_url ?? "",
+      home_images: (form.home_images ?? []) as any,
+      banner_enabled: !!form.banner_enabled,
+      banner_text: form.banner_text ?? "",
+      banner_cta_label: form.banner_cta_label ?? "",
+      banner_cta_link: form.banner_cta_link ?? "",
     }).eq("id", form.id);
     setSaving(false);
     if (error) toast.error(error.message);
@@ -75,6 +83,81 @@ function AdminSettings() {
         <Input label="Hero title" value={form.hero_title} onChange={(v) => update({ hero_title: v })} />
         <Textarea label="Hero subtitle" value={form.hero_subtitle} onChange={(v) => update({ hero_subtitle: v })} />
         <Textarea label="About text (long)" value={form.about_text} onChange={(v) => update({ about_text: v })} />
+      </Section>
+
+      <Section title="Branding & images">
+        <ImagePicker label="Logo" value={form.logo_url ?? ""} onChange={(v) => update({ logo_url: v })} />
+        <ImagePicker label="Hero background image" value={form.hero_image_url ?? ""} onChange={(v) => update({ hero_image_url: v })} />
+        <p className="text-xs text-muted-foreground">Leave empty to use the default design images.</p>
+      </Section>
+
+      <Section title="Home page feature cards">
+        <p className="text-xs text-muted-foreground">
+          These are the picture cards shown on the home page. Leave the list empty to keep the default ones.
+        </p>
+        <div className="space-y-4">
+          {(form.home_images ?? []).map((img, i) => (
+            <div key={i} className="rounded-xl border border-border p-4 space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-xs uppercase tracking-wider text-muted-foreground">Card {i + 1}</span>
+                <button
+                  onClick={() => update({ home_images: (form.home_images ?? []).filter((_, k) => k !== i) })}
+                  className="text-xs text-destructive"
+                >
+                  Remove
+                </button>
+              </div>
+              <ImagePicker
+                label="Picture"
+                value={img.image_url ?? ""}
+                onChange={(v) => {
+                  const next = [...(form.home_images ?? [])];
+                  next[i] = { ...next[i], image_url: v };
+                  update({ home_images: next });
+                }}
+              />
+              <Input
+                label="Title"
+                value={img.name ?? ""}
+                onChange={(v) => {
+                  const next = [...(form.home_images ?? [])];
+                  next[i] = { ...next[i], name: v };
+                  update({ home_images: next });
+                }}
+              />
+              <Input
+                label="Small label (e.g. Bestseller)"
+                value={img.tag ?? ""}
+                onChange={(v) => {
+                  const next = [...(form.home_images ?? [])];
+                  next[i] = { ...next[i], tag: v };
+                  update({ home_images: next });
+                }}
+              />
+            </div>
+          ))}
+        </div>
+        <button
+          onClick={() => update({ home_images: [...(form.home_images ?? []), { image_url: "", name: "", tag: "" }] })}
+          className="rounded-full border border-border px-4 py-2 text-sm"
+        >
+          + Add card
+        </button>
+      </Section>
+
+      <Section title="Promo banner">
+        <label className="flex items-center gap-3">
+          <input
+            type="checkbox"
+            checked={!!form.banner_enabled}
+            onChange={(e) => update({ banner_enabled: e.target.checked })}
+            className="h-5 w-5"
+          />
+          <span className="text-sm">Show promo banner at the top of the site</span>
+        </label>
+        <Textarea label="Banner text" value={form.banner_text ?? ""} onChange={(v) => update({ banner_text: v })} />
+        <Input label="Button label (optional)" value={form.banner_cta_label ?? ""} onChange={(v) => update({ banner_cta_label: v })} />
+        <Input label="Button link (optional, e.g. /menu)" value={form.banner_cta_link ?? ""} onChange={(v) => update({ banner_cta_link: v })} />
       </Section>
 
       <Section title="Delivery">

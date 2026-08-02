@@ -227,16 +227,23 @@ export type Database = {
         Row: {
           about_text: string
           address: string
+          banner_cta_label: string
+          banner_cta_link: string
+          banner_enabled: boolean
+          banner_text: string
           contact_email: string
           delivery_fee: number
           emailjs_enabled: boolean | null
           emailjs_public_key: string | null
           emailjs_service_id: string | null
           emailjs_template_id: string | null
+          hero_image_url: string
           hero_subtitle: string
           hero_title: string
+          home_images: Json
           id: string
           is_open: boolean
+          logo_url: string
           min_order_amount: number
           notification_email: string
           online_payment_enabled: boolean
@@ -249,16 +256,23 @@ export type Database = {
         Insert: {
           about_text?: string
           address?: string
+          banner_cta_label?: string
+          banner_cta_link?: string
+          banner_enabled?: boolean
+          banner_text?: string
           contact_email?: string
           delivery_fee?: number
           emailjs_enabled?: boolean | null
           emailjs_public_key?: string | null
           emailjs_service_id?: string | null
           emailjs_template_id?: string | null
+          hero_image_url?: string
           hero_subtitle?: string
           hero_title?: string
+          home_images?: Json
           id?: string
           is_open?: boolean
+          logo_url?: string
           min_order_amount?: number
           notification_email?: string
           online_payment_enabled?: boolean
@@ -271,16 +285,23 @@ export type Database = {
         Update: {
           about_text?: string
           address?: string
+          banner_cta_label?: string
+          banner_cta_link?: string
+          banner_enabled?: boolean
+          banner_text?: string
           contact_email?: string
           delivery_fee?: number
           emailjs_enabled?: boolean | null
           emailjs_public_key?: string | null
           emailjs_service_id?: string | null
           emailjs_template_id?: string | null
+          hero_image_url?: string
           hero_subtitle?: string
           hero_title?: string
+          home_images?: Json
           id?: string
           is_open?: boolean
+          logo_url?: string
           min_order_amount?: number
           notification_email?: string
           online_payment_enabled?: boolean
