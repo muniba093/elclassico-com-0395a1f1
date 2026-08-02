@@ -23,6 +23,9 @@ export function SiteNav() {
   const { user, isAdmin } = useAuth();
   const { data: settings } = useSiteSettings();
   const closed = settings?.is_open === false;
+  const logoSrc = settings?.logo_url || logo;
+  const brandName = settings?.restaurant_name || "Crunzify";
+  const showBanner = !!settings?.banner_enabled && !!settings?.banner_text;
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const onDarkHero = DARK_HERO_PATHS.includes(pathname);
   const lightText =
@@ -39,8 +42,18 @@ export function SiteNav() {
 
   return (
     <>
+    {showBanner && (
+      <div className="fixed inset-x-0 top-0 z-[61] bg-gradient-gold text-charcoal-deep text-center text-xs sm:text-sm py-2 px-4 flex items-center justify-center gap-3 flex-wrap">
+        <span className="font-medium">{settings?.banner_text}</span>
+        {settings?.banner_cta_label && settings?.banner_cta_link && (
+          <a href={settings.banner_cta_link} className="underline underline-offset-2 font-semibold">
+            {settings.banner_cta_label}
+          </a>
+        )}
+      </div>
+    )}
     {closed && (
-      <div className="fixed inset-x-0 top-0 z-[60] bg-destructive text-destructive-foreground text-center text-xs sm:text-sm py-2 px-4">
+      <div className={`fixed inset-x-0 z-[60] bg-destructive${showBanner ? " top-8" : " top-0"}`.replace("bg-destructive","bg-destructive") + "  text-destructive-foreground text-center text-xs sm:text-sm py-2 px-4">
         We're currently closed — online orders are paused. Please check back soon.
       </div>
     )}
