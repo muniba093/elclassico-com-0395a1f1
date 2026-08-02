@@ -14,11 +14,42 @@ export const Route = createFileRoute("/auth")({
   component: AuthPage,
 });
 
-const schema = z.object({
+const strongPassword = z
+  .string()
+  .min(8, "Password must be at least 8 characters")
+  .max(72)
+  .regex(/[a-z]/, "Password must include a lowercase letter")
+  .regex(/[A-Z]/, "Password must include an uppercase letter")
+  .regex(/[0-9]/, "Password must include a number")
+  .regex(/[^A-Za-z0-9]/, "Password must include a special character (!@#$…)");
+
+const signInSchema = z.object({
   email: z.string().trim().email("Invalid email").max(255),
-  password: z.string().min(6, "Password must be at least 6 characters").max(72),
-  name: z.string().trim().min(1, "Name required").max(80).optional(),
+  password: z.string().min(1, "Password required").max(72),
 });
+
+const signUpSchema = z.object({
+  email: z.string().trim().email("Invalid email").max(255),
+  password: strongPassword,
+  name: z.string().trim().min(1, "Name required").max(80),
+});
+
+const RULES = [
+  { label: "At least 8 characters", test: (p: string) => p.length >= 8 },
+  { label: "One uppercase letter (A-Z)", test: (p: string) => /[A-Z]/.test(p) },
+  { label: "One lowercase letter (a-z)", test: (p: string) => /[a-z]/.test(p) },
+  { label: "One number (0-9)", test: (p: string) => /[0-9]/.test(p) },
+  { label: "One special character (!@#$…)", test: (p: string) => /[^A-Za-z0-9]/.test(p) },
+];
+
+function strengthOf(password: string) {
+  const passed = RULES.filter((r) => r.test(password)).length;
+  const bonus = password.length >= 12 ? 1 : 0;
+  const score = Math.min(4, Math.max(0, passed + bonus - 1));
+  const labels = ["Very weak", "Weak", "Fair", "Strong", "Very strong"];
+  const colors = ["bg-destructive", "bg-destructive", "bg-gold", "bg-emerald-500", "bg-emerald-600"];
+  return { score, passed, label: labels[score], color: colors[score] };
+}
 
 function AuthPage() {
   const [mode, setMode] = useState<"signin" | "signup">("signin");
@@ -37,7 +68,10 @@ function AuthPage() {
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
-    const parsed = schema.safeParse({ email, password, name: mode === "signup" ? name : undefined });
+    const parsed =
+      mode === "signup"
+        ? signUpSchema.safeParse({ email, password, name })
+        : signInSchema.safeParse({ email, password });
     if (!parsed.success) {
       toast.error(parsed.error.issues[0].message);
       return;
