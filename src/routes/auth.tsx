@@ -173,6 +173,34 @@ function AuthPage() {
                     {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
                 </div>
+                {mode === "signup" && password.length > 0 && (
+                  <div className="mt-3">
+                    <div className="flex gap-1">
+                      {[0, 1, 2, 3].map((i) => (
+                        <span
+                          key={i}
+                          className={`h-1.5 flex-1 rounded-full ${
+                            i <= strengthOf(password).score ? strengthOf(password).color : "bg-border"
+                          }`}
+                        />
+                      ))}
+                    </div>
+                    <p className="mt-2 text-xs text-muted-foreground">
+                      Password strength: <span className="font-medium text-foreground">{strengthOf(password).label}</span>
+                    </p>
+                    <ul className="mt-2 space-y-1">
+                      {RULES.map((r) => {
+                        const ok = r.test(password);
+                        return (
+                          <li key={r.label} className={`text-xs flex items-center gap-2 ${ok ? "text-emerald-600" : "text-muted-foreground"}`}>
+                            <span aria-hidden>{ok ? "✓" : "•"}</span>
+                            {r.label}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                )}
               </div>
               <button
                 disabled={loading}
