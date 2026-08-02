@@ -12,6 +12,7 @@ const links = [
   { to: "/menu", label: "Menu" },
   { to: "/about", label: "About Us" },
   { to: "/visit", label: "Visit Us" },
+  { to: "/blog", label: "Blog" },
 ] as const;
 
 const DARK_HERO_PATHS = ["/", "/menu"];
