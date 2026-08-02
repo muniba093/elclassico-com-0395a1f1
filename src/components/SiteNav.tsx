@@ -53,15 +53,18 @@ export function SiteNav() {
       </div>
     )}
     {closed && (
-      <div className={`fixed inset-x-0 z-[60] bg-destructive${showBanner ? " top-8" : " top-0"}`.replace("bg-destructive","bg-destructive") + "  text-destructive-foreground text-center text-xs sm:text-sm py-2 px-4">
+      <div
+        className={`fixed inset-x-0 z-[60] bg-destructive text-destructive-foreground text-center text-xs sm:text-sm py-2 px-4 ${
+          showBanner ? "top-9" : "top-0"
+        }`}
+      >
         We're currently closed — online orders are paused. Please check back soon.
       </div>
     )}
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
         scrolled ? "py-2" : "py-4"
-      } ${closed ? "mt-8" : ""
-      }`}
+      } ${closed && showBanner ? "mt-16" : closed || showBanner ? "mt-9" : ""}`}
     >
       <div
         className={`mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 transition-all duration-500 ${
@@ -77,8 +80,8 @@ export function SiteNav() {
             <SidebarTrigger className={`hidden md:inline-flex -ml-1 hover:bg-transparent ${navText}`} />
             <Link to="/" className="flex items-center gap-2 group">
               <img
-                src={logo}
-                alt="Crunzify"
+                src={logoSrc}
+                alt={brandName}
                 width={36}
                 height={36}
                 className="h-9 w-9 rounded-full object-cover ring-1 ring-border transition-transform duration-500 group-hover:rotate-12"
@@ -88,7 +91,7 @@ export function SiteNav() {
     lightText ? "text-ivory" : "text-foreground"
   }`}
 >
-  Crunzify
+  {brandName}
 </span>
             </Link>
           </div>
