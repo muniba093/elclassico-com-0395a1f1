@@ -27,6 +27,7 @@ import { Route as AdminUsersRouteImport } from './routes/admin.users'
 import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
 import { Route as AdminPromosRouteImport } from './routes/admin.promos'
 import { Route as AdminMenuRouteImport } from './routes/admin.menu'
+import { Route as AdminDealsRouteImport } from './routes/admin.deals'
 import { Route as AdminCategoriesRouteImport } from './routes/admin.categories'
 
 const VisitRoute = VisitRouteImport.update({
@@ -119,6 +120,11 @@ const AdminMenuRoute = AdminMenuRouteImport.update({
   path: '/menu',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminDealsRoute = AdminDealsRouteImport.update({
+  id: '/deals',
+  path: '/deals',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminCategoriesRoute = AdminCategoriesRouteImport.update({
   id: '/categories',
   path: '/categories',
@@ -138,6 +144,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/visit': typeof VisitRoute
   '/admin/categories': typeof AdminCategoriesRoute
+  '/admin/deals': typeof AdminDealsRoute
   '/admin/menu': typeof AdminMenuRoute
   '/admin/promos': typeof AdminPromosRoute
   '/admin/settings': typeof AdminSettingsRoute
@@ -158,6 +165,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/visit': typeof VisitRoute
   '/admin/categories': typeof AdminCategoriesRoute
+  '/admin/deals': typeof AdminDealsRoute
   '/admin/menu': typeof AdminMenuRoute
   '/admin/promos': typeof AdminPromosRoute
   '/admin/settings': typeof AdminSettingsRoute
@@ -180,6 +188,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/visit': typeof VisitRoute
   '/admin/categories': typeof AdminCategoriesRoute
+  '/admin/deals': typeof AdminDealsRoute
   '/admin/menu': typeof AdminMenuRoute
   '/admin/promos': typeof AdminPromosRoute
   '/admin/settings': typeof AdminSettingsRoute
@@ -203,6 +212,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/visit'
     | '/admin/categories'
+    | '/admin/deals'
     | '/admin/menu'
     | '/admin/promos'
     | '/admin/settings'
@@ -223,6 +233,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/visit'
     | '/admin/categories'
+    | '/admin/deals'
     | '/admin/menu'
     | '/admin/promos'
     | '/admin/settings'
@@ -244,6 +255,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/visit'
     | '/admin/categories'
+    | '/admin/deals'
     | '/admin/menu'
     | '/admin/promos'
     | '/admin/settings'
@@ -396,6 +408,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminMenuRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/deals': {
+      id: '/admin/deals'
+      path: '/deals'
+      fullPath: '/admin/deals'
+      preLoaderRoute: typeof AdminDealsRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/categories': {
       id: '/admin/categories'
       path: '/categories'
@@ -408,6 +427,7 @@ declare module '@tanstack/react-router' {
 
 interface AdminRouteChildren {
   AdminCategoriesRoute: typeof AdminCategoriesRoute
+  AdminDealsRoute: typeof AdminDealsRoute
   AdminMenuRoute: typeof AdminMenuRoute
   AdminPromosRoute: typeof AdminPromosRoute
   AdminSettingsRoute: typeof AdminSettingsRoute
@@ -417,6 +437,7 @@ interface AdminRouteChildren {
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminCategoriesRoute: AdminCategoriesRoute,
+  AdminDealsRoute: AdminDealsRoute,
   AdminMenuRoute: AdminMenuRoute,
   AdminPromosRoute: AdminPromosRoute,
   AdminSettingsRoute: AdminSettingsRoute,

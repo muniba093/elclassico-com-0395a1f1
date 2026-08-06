@@ -38,6 +38,51 @@ export type Database = {
         }
         Relationships: []
       }
+      deals: {
+        Row: {
+          active: boolean
+          created_at: string
+          description: string
+          discount_percent: number
+          featured: boolean
+          id: string
+          image_url: string
+          original_price: number
+          sort_order: number
+          title: string
+          updated_at: string
+          valid_till: string | null
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          description?: string
+          discount_percent?: number
+          featured?: boolean
+          id?: string
+          image_url?: string
+          original_price?: number
+          sort_order?: number
+          title: string
+          updated_at?: string
+          valid_till?: string | null
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          description?: string
+          discount_percent?: number
+          featured?: boolean
+          id?: string
+          image_url?: string
+          original_price?: number
+          sort_order?: number
+          title?: string
+          updated_at?: string
+          valid_till?: string | null
+        }
+        Relationships: []
+      }
       menu_items: {
         Row: {
           available: boolean
