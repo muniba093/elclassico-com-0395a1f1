@@ -11,6 +11,7 @@ import wrap from "@/assets/wrap.jpg";
 import cake from "@/assets/Choclate-cake.jpg";
 import pizzaAsset from "@/assets/pizza.jpg";
 import { useSiteSettings } from "@/lib/site-settings";
+import { DealsSection } from "@/components/DealsSection";
 
 
 export const Route = createFileRoute("/")({
@@ -185,6 +186,8 @@ function HomePage() {
       </section>
 
       {/* POPULAR PICKS */}
+      <DealsSection />
+
       <section className="py-24 sm:py-32 bg-secondary/50">
         <div className="mx-auto max-w-7xl px-6">
           <div className="flex flex-wrap items-end justify-between gap-6">
