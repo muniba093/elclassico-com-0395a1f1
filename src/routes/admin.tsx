@@ -32,6 +32,7 @@ function AdminLayout() {
     { to: "/admin", label: "Orders" },
     { to: "/admin/menu", label: "Menu" },
     { to: "/admin/categories", label: "Categories" },
+    { to: "/admin/deals", label: "Deals" },
     { to: "/admin/promos", label: "Promos" },
     { to: "/admin/settings", label: "Settings" },
     { to: "/admin/users", label: "Users" },
